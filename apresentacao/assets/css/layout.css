@@ -113,7 +113,7 @@ body.has-pointer .spotlight{ opacity:1; }
   line-height:1.5;
   letter-spacing:.015em;
   color:#EFEFF4;
-  text-shadow:0 0 32px rgba(245,224,0,.16);
+  text-shadow:0 0 26px rgba(245,224,0,.09);
 }
 .intro__typed.is-out{ opacity:0; transition:opacity .5s var(--ease); }
 
@@ -188,19 +188,34 @@ body.has-pointer .spotlight{ opacity:1; }
 .intro__brand.is-in .intro__logo{
   transform:none;
   opacity:1;
-  filter:drop-shadow(0 0 46px rgba(245,238,0,.42));
+  /* Halo do próprio logotipo. Antes: 46px a .42 — um borrão dourado
+     largo em volta das letras. Agora fica curto e fraco, o suficiente
+     para destacar o branco do preto sem virar mancha (medido: ver
+     `luzbench.py`). */
+  filter:drop-shadow(0 0 13px rgba(245,238,0,.21));
 }
-/* A luz de marca passa por trás do logotipo quando ele se forma */
+/* A luz de marca passa por trás do logotipo quando ele se forma.
+
+   DUAS ESCALAS, como o `.spotlight` do próprio projeto
+   (núcleo forte + cauda fraca) em vez de uma rampa única. Uma rampa
+   única cai quase em linha reta e a BORDA do disco aparece — era o que
+   denunciava o "radial-gradient genérico". Aqui: .11 no centro,
+   .026 a 24% do raio, dissolvendo até 76%. O disco também encolheu
+   (70vw/620px -> 34vw/320px) e a área dourada caiu de ~15% do quadro
+   para ~2,6..7,3%. */
 .intro__brand.is-in::after{
   content:"";
   position:absolute;
   left:50%; top:50%;
-  width:min(70vw,620px);
+  width:min(34vw,320px);
   aspect-ratio:1/1;
   transform:translate(-50%,-50%);
   border-radius:50%;
-  background:radial-gradient(circle, rgba(245,238,0,.2), transparent 66%);
-  filter:blur(30px);
+  background:radial-gradient(circle,
+    rgba(245,238,0,.11),
+    rgba(245,238,0,.026) 24%,
+    transparent 76%);
+  filter:blur(28px);
   pointer-events:none;
   z-index:-1;
   animation:brandHalo 3.6s var(--ease) .5s both;
@@ -470,13 +485,32 @@ body.has-pointer .spotlight{ opacity:1; }
   isolation:isolate;
 }
 
-/* Base grafite com luz dourada vinda de baixo */
+/* Base grafite com luz dourada vinda de baixo.
+
+   A luz dourada era uma elipse de 120% x 78% do quadro com UMA parada
+   (alfa .2 -> transparente a 58%), ancorada em 14%/92% (canto inferior
+   esquerdo). Só que uma rampa única cai de forma quase linear: em vez
+   de luz, lia-se um disco amarelo com borda — a "nuvem de IA". Somada à
+   malha dourada, cobria 22,5% do quadro (13,6% acima do limiar forte).
+
+   Agora: 42% x 30%, pico .085 (era .2), com a parada do meio em .018 a
+   18% — bem perto do núcleo — e dissolvendo só até 88%. A parada perto
+   do centro é o que cria as DUAS escalas: um núcleo pequeno e forte
+   mais uma cauda longa e fraca. A âncora desceu para 6%/98% para o
+   brilho nascer da quina, e não do meio da parede.
+
+   Medido (gradiente ISOLADO, sem a malha de pontos): cauda 2,05x ->
+   4,00x, área 3,2% -> 1,0%, pico 0,074 igual. No quadro inteiro a área
+   dourada caiu de 22,5% para 1,8% e o pico de 0,25 para 0,11. */
 .hero__base{
   position:absolute;
   inset:0;
   z-index:-3;
   background:
-    radial-gradient(120% 78% at 14% 92%, rgba(245,224,0,.2), transparent 58%),
+    radial-gradient(42% 30% at 6% 98%,
+      rgba(245,224,0,.085),
+      rgba(245,224,0,.018) 18%,
+      transparent 88%),
     radial-gradient(80% 60% at 88% 12%, rgba(61,107,224,.07), transparent 60%),
     linear-gradient(174deg, #0A0C11 0%, var(--ink) 46%, #0D0F15 100%);
 }
@@ -499,7 +533,7 @@ body.has-pointer .spotlight{ opacity:1; }
   content:"";
   position:absolute;
   inset:0;
-  background-image:radial-gradient(rgba(245,224,0,.11) 1px, transparent 1px);
+  background-image:radial-gradient(rgba(245,224,0,.055) 1px, transparent 1px);
   background-size:22px 22px;
   background-position:11px 11px;
 }
@@ -591,7 +625,7 @@ body.has-pointer .spotlight{ opacity:1; }
   font-style:normal;
   text-transform:uppercase;
   color:var(--gold);
-  text-shadow:0 0 48px rgba(245,224,0,.5);
+  text-shadow:0 0 40px rgba(245,224,0,.38);
 }
 
 .hero__lead{
