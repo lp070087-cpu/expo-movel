@@ -1,0 +1,96 @@
+// index-1 video call
+.ul-1-video-call {
+    background-color: var(--ul-primary);
+
+    .ul-section-title,
+    .ul-2-about-list li {
+        color: var(--white);
+    }
+
+    .ul-section-descr {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    &-img {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        margin-right: -66px;
+
+        @include xl {
+            justify-content: flex-start;
+        }
+
+        @include md {
+            justify-content: center;
+            margin-right: 0;
+        }
+
+        .main-img {
+            margin-right: -88px;
+            z-index: 1;
+            width: clamp(310px, 20.81vw, 396px);
+
+            @include md {
+                margin-right: -44px;
+            }
+
+            @include sm {
+                width: clamp(280px, 18.08vw, 344px);
+            }
+        }
+
+        .img-2 {
+            width: clamp(280px, 18.08vw, 344px);
+
+            @include sm {
+                width: clamp(240px, 15.68vw, 296px);
+            }
+        }
+    }
+
+    .ul-inner-video-call-txt {
+        @include md {
+            padding-bottom: 30px;
+        }
+    }
+}
+
+
+// index-2 video caLL 
+.ul-video-call {
+    background: url(../img/video-call-bg.jpg) no-repeat center center / cover;
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(81.53deg, #041C33 8.34%, rgba(4, 28, 51, 0) 96.66%);
+    }
+
+    &-txt {
+        padding-top: clamp(160px, 16.76vw, 319px);
+    }
+
+    .ul-section-sub-title {
+        color: var(--ul-c3);
+
+        &::before {
+            background-color: var(--ul-c3);
+        }
+    }
+
+    .ul-btn {
+        margin-top: clamp(24px, 2.52vw, 48px);
+        background-color: var(--ul-secondary);
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--ul-c3);
+            color: var(--ul-primary);
+        }
+    }
+}

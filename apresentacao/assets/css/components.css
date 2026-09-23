@@ -1,0 +1,167 @@
+/* ============================================================
+   EXPO MÓVEL — components.css
+   Primitivas de reveal, máscaras de linha e microinterações.
+   ============================================================ */
+
+/* ============================================================
+   REVEAL POR SCROLL (IntersectionObserver adiciona .is-in)
+   ============================================================ */
+[data-reveal]{
+  opacity:0;
+  transform:translate3d(0,26px,0);
+  transition:
+    opacity .82s var(--ease-out),
+    transform .82s var(--ease-out);
+  will-change:opacity,transform;
+}
+[data-reveal].is-in{
+  opacity:1;
+  transform:none;
+}
+/* Libera a camada depois que entra */
+[data-reveal].is-done{ will-change:auto; }
+
+/* ============================================================
+   MÁSCARA DE LINHA (título revelado por clip-path)
+   Estrutura: .line > .line__in
+   ============================================================ */
+.line{
+  display:block;
+  overflow:hidden;
+  padding-bottom:.06em;   /* respiro para descendentes */
+  margin-bottom:-.06em;
+}
+.line__in{
+  display:block;
+  clip-path:inset(0 0 102% 0);
+  transform:translate3d(0,.42em,0);
+  transition:
+    clip-path 1s var(--ease-out),
+    transform 1s var(--ease-out);
+  will-change:clip-path,transform;
+}
+[data-reveal-mask].is-in .line__in{
+  clip-path:inset(0 0 -2% 0);
+  transform:none;
+}
+[data-reveal-mask] .line:nth-child(2) .line__in{ transition-delay:.11s; }
+[data-reveal-mask] .line:nth-child(3) .line__in{ transition-delay:.22s; }
+[data-reveal-mask] .line:nth-child(4) .line__in{ transition-delay:.33s; }
+
+/* ============================================================
+   LINHAS DO MANIFESTO (clip-path horizontal dirigido por scroll)
+   ============================================================ */
+[data-manifesto-line] > span{
+  transition:clip-path .18s linear, color .5s var(--ease);
+}
+
+/* ============================================================
+   CONTADORES
+   ============================================================ */
+[data-count]{
+  display:inline-block;
+  font-variant-numeric:tabular-nums;
+  min-width:1ch;
+}
+
+/* ============================================================
+   BOTÕES MAGNÉTICOS
+   ============================================================ */
+[data-magnetic]{
+  transition:
+    color .35s var(--ease),
+    border-color .35s var(--ease),
+    background-color .35s var(--ease),
+    transform .38s var(--ease-out);
+}
+[data-magnetic].is-pulling{ transition:transform .12s linear; }
+
+/* ============================================================
+   LINKS EXTERNOS — marca discreta
+   ============================================================ */
+a[target="_blank"]::after{
+  content:"";
+  display:inline-block;
+  width:.42em; height:.42em;
+  margin-left:.42em;
+  vertical-align:baseline;
+  border-top:1px solid currentColor;
+  border-right:1px solid currentColor;
+  opacity:.55;
+  transform:translateY(-.06em);
+}
+/* Não aplicar em botões nem nas listas do rodapé */
+.btn[target="_blank"]::after{ display:none; }
+.footer__nav a[target="_blank"]::after{ display:none; }
+.contact__insta a[target="_blank"]::after{ display:none; }
+.enroll__note a[target="_blank"]::after{ display:none; }
+.wordmark::after,
+.nav__brand::after,
+.footer__brand a::after{ display:none; }
+
+/* ============================================================
+   IMAGENS QUE AINDA NÃO CARREGARAM
+   ============================================================ */
+.shot__img,
+.venue__img,
+.hero__strip-img{
+  background-color:var(--ink-3);
+  background-image:linear-gradient(115deg, rgba(255,255,255,.03) 0%, rgba(255,255,255,.075) 50%, rgba(255,255,255,.03) 100%);
+  background-size:220% 100%;
+  animation:shimmer 1.9s linear infinite;
+}
+.shot__img:has(img[complete]),
+.venue__img:has(img[complete]),
+.hero__strip-img:has(img[complete]){ animation:none; }
+
+@keyframes shimmer{
+  0%{ background-position:120% 0; }
+  100%{ background-position:-20% 0; }
+}
+
+/* ============================================================
+   MODO ALTO CONTRASTE
+   ============================================================ */
+@media (prefers-contrast: more){
+  .section-lead,
+  .about__col p,
+  .profile__desc,
+  .chain__desc,
+  .pillar__text,
+  .stop__meta{ color:#DDE0E8; }
+
+  .section-label,
+  .numbers__note,
+  .stat__label{ color:#B9BECB; }
+
+  .line,
+  .shot figcaption{ --line:rgba(255,255,255,.3); }
+}
+
+/* ============================================================
+   IMPRESSÃO — versão sóbria e legível
+   ============================================================ */
+@media print{
+  .intro,
+  .grain,
+  .spotlight,
+  .progress,
+  .dotnav,
+  .nav,
+  .hero__grid,
+  .hero__scroll,
+  .journey__canvas,
+  .journey__hud,
+  .final__canvas,
+  .final__vignette,
+  .footer__replay{ display:none!important; }
+
+  html,body{ background:#fff; color:#111; }
+  [data-reveal],
+  [data-reveal-mask] .line__in,
+  [data-manifesto-line] > span,
+  .final__ghost,.final__brand,.final__cta{ opacity:1!important; transform:none!important; clip-path:none!important; }
+  .section{ padding-block:1.6rem; page-break-inside:avoid; }
+  .hero{ min-height:auto; }
+  a{ color:#111; text-decoration:underline; }
+}

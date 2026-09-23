@@ -1,0 +1,81 @@
+/*!--------------------
+Template Name: Meditics - Doctor & Medical HTML Template
+Author: tempticspro
+Version: 1.0
+
+CSS INDEX
+=================== 
+01. CUSTOM PROPERTIES
+02. GLOBAL
+03. Components
+04. Sidebar
+05. Header
+06. Banner
+07. About
+08. Services
+09. CTA
+10. Clients
+11. Qualification
+12. Video Call
+13. Feedback
+14. Appointment
+15. Blog
+16. Footer
+
+
+// PAGE 2
+17. Ticker
+18. Team
+19. Why Choose Us
+
+--- INNER PAGES
+20. About Page
+21. Services Page
+22. Service Details Page
+23. Team Details Page
+24. Appointment Page
+25. 404 Page
+26. Blog Page
+27. Contact Page
+28. Blog Details Page
+29. Case Study Page
+
+*/
+
+@import "main/breakpoints";
+@import "main/variables";
+@import "main/global";
+@import "main/components";
+
+// sections
+@import "sections/sidebar";
+@import "sections/header";
+@import "sections/banner";
+@import "sections/about";
+@import "sections/services";
+@import "sections/cta";
+@import "sections/clients";
+@import "sections/qualification";
+@import "sections/_video-call.scss";
+@import "sections/feedbacks";
+@import "sections/appointment";
+@import "sections/blog";
+@import "sections/footer";
+
+// page 2
+@import "sections/ticker";
+@import "sections/team";
+@import "sections/why-choose-us";
+
+
+// inner pages
+@import "pages/p-about";
+@import "pages/p-services";
+@import "pages/service-details";
+@import "pages/team-details";
+@import "pages/p-appointment";
+@import "pages/404";
+@import "pages/p-blog";
+@import "pages/p-contact";
+@import "pages/blog-details";
+@import "pages/p-case-study";

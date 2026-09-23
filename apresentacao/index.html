@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Expo Móvel — O mercado se encontra aqui.</title>
+<meta name="description" content="A Expo Móvel realiza feiras corporativas do setor moveleiro em Pernambuco, Ceará, Maranhão e Goiás. Cinco feiras em 2027. Móveis, eletrodomésticos e colchões.">
+<meta name="theme-color" content="#F5EE00">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Expo Móvel — O mercado se encontra aqui.">
+<meta property="og:description" content="Feiras corporativas do setor moveleiro. Cinco encontros em 2027: Caruaru, São Luís, Fortaleza e Goiânia.">
+<meta property="og:locale" content="pt_BR">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700;1,800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/cred.css">
+<link rel="stylesheet" href="assets/css/motion.css">
+
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Expo Móvel",
+  "url": "https://expomovel.com.br/",
+  "description": "Feiras corporativas do setor moveleiro: móveis, eletrodomésticos e colchões. Operação no Norte, Nordeste e Centro-Oeste do Brasil.",
+  "email": "comercial@expomovel.com.br",
+  "telephone": "+5581988756207",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Artur Mendonça, 38 — Centro",
+    "addressLocality": "Moreno",
+    "addressRegion": "PE",
+    "postalCode": "54800-000",
+    "addressCountry": "BR"
+  },
+  "sameAs": ["https://www.instagram.com/expomovel/"]
+}
+</script>
+</head>
+
+<body>
+
+<a class="skip-link" href="#inicio">Ir para o conteúdo</a>
+
+<!-- ============ CURSOR / LUZ ============ -->
+<div class="spotlight" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ PROGRESSO ============ -->
+<div class="progress" aria-hidden="true"><span class="progress__fill" data-progress-fill></span></div>
+
+<!-- ============ INTRO CINEMATOGRÁFICA ============ -->
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Abertura">
+  <canvas class="intro__canvas" data-intro-canvas aria-hidden="true"></canvas>
+  <div class="intro__vignette" aria-hidden="true"></div>
+
+  <div class="intro__stage">
+    <p class="intro__typed" data-intro-typed aria-hidden="true"><span data-intro-text></span><i class="intro__caret" data-intro-caret hidden></i></p>
+
+    <div class="intro__brand" data-intro-brand>
+      <p class="intro__welcome" data-intro-welcome aria-hidden="true"><span data-intro-welcome-text></span><i class="intro__caret" data-intro-caret-2 hidden></i></p>
+      <h1 class="intro__wordmark" aria-hidden="true">
+        <img class="intro__logo" src="assets/img/logo-expo-movel-light.png" alt="" width="1800" height="534" decoding="async">
+      </h1>
+      <p class="intro__year" aria-hidden="true">2027</p>
+    </div>
+
+    <!-- Texto real para leitores de tela (não animado) -->
+    <p class="sr-only">Bem-vindo à Expo Móvel. Negócios começam com encontros.</p>
+  </div>
+
+  <button class="intro__skip" type="button" data-intro-skip>
+    Pular introdução
+    <svg viewBox="0 0 16 16" aria-hidden="true" width="12" height="12"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="intro__flash" data-intro-flash aria-hidden="true"></div>
+</div>
+
+<!-- ============ NAVEGAÇÃO ============ -->
+<header class="nav" data-nav>
+  <a class="nav__brand" href="#inicio" aria-label="Expo Móvel — início">
+    <span class="wordmark wordmark--sm">
+      <img class="wordmark-light" src="assets/img/logo-expo-movel-light.png" alt="Expo Móvel" width="1800" height="534" decoding="async">
+      <img class="wordmark-navy" src="assets/img/logo-expo-movel-navy.png" alt="Expo Móvel" width="1800" height="534" decoding="async">
+    </span>
+  </a>
+
+  <nav class="nav__links" id="nav-links" aria-label="Seções">
+    <a href="#manifesto">Manifesto</a>
+    <a href="#sobre">A feira</a>
+    <a href="#calendario">Calendário 2027</a>
+    <a href="#publico">Para quem é</a>
+  </nav>
+
+  <a class="btn btn--ghost btn--sm nav__cta" href="#credenciamento">
+    <span>Credenciamento</span>
+  </a>
+
+  <!-- Menu enxuto do celular/tablet. Abaixo de 1180px os quatro links
+       não cabem ao lado da marca e do CTA, então viram um painel que
+       desce do cabeçalho. No desktop o botão não existe (display:none)
+       e a navegação continua exatamente como era. -->
+  <button class="nav__toggle" type="button" data-nav-toggle
+          aria-controls="nav-links" aria-expanded="false" aria-label="Abrir menu">
+    <span class="nav__toggle-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+</header>
+
+<!-- ============ NAVEGAÇÃO LATERAL ============ -->
+<nav class="dotnav" aria-label="Navegação rápida" data-dotnav>
+  <a href="#inicio" data-dot="inicio" aria-label="Início"></a>
+  <a href="#manifesto" data-dot="manifesto" aria-label="Manifesto"></a>
+  <a href="#sobre" data-dot="sobre" aria-label="O que é a Expo Móvel"></a>
+  <a href="#numeros" data-dot="numeros" aria-label="Números"></a>
+  <a href="#calendario" data-dot="calendario" aria-label="Calendário 2027"></a>
+  <a href="#conexao" data-dot="conexao" aria-label="Onde o mercado se encontra"></a>
+  <a href="#publico" data-dot="publico" aria-label="Para quem é"></a>
+  <a href="#credenciamento" data-dot="credenciamento" aria-label="Credenciamento"></a>
+  <a href="#galeria" data-dot="galeria" aria-label="Galeria"></a>
+  <a href="#contato" data-dot="contato" aria-label="Contato"></a>
+</nav>
+
+<main>
+
+<!-- ============ 02 · HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="hero__base" aria-hidden="true"></div>
+  <div class="hero__grid" aria-hidden="true"></div>
+  <canvas class="hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
+
+  <div class="hero__inner">
+    <p class="eyebrow eyebrow--gold" data-reveal>
+      <span class="eyebrow__rule"></span>
+      Feiras corporativas do setor moveleiro
+    </p>
+
+    <h2 class="hero__title" data-reveal-mask>
+      <span class="line"><span class="line__in">O mercado</span></span>
+      <span class="line"><span class="line__in">se encontra <em>aqui</em>.</span></span>
+    </h2>
+
+    <p class="hero__lead" data-reveal data-reveal-delay="180">
+      A Expo Móvel reúne, durante três dias, quem fabrica, quem representa e quem vende.
+      Móveis, eletrodomésticos e colchões — no mesmo lugar, com o mesmo propósito.
+    </p>
+
+    <div class="hero__actions" data-reveal data-reveal-delay="280">
+      <a class="btn btn--gold" href="#calendario" data-magnetic>
+        <span>Ver o calendário 2027</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn--line" href="#credenciamento">Quero participar</a>
+    </div>
+
+    <dl class="hero__facts" data-reveal data-reveal-delay="360">
+      <div><dt>Feiras</dt><dd>05</dd></div>
+      <div><dt>Expositores</dt><dd>+500</dd></div>
+      <div><dt>Visitantes</dt><dd>+20 mil</dd></div>
+    </dl>
+  </div>
+
+  <!-- Faixa panorâmica: vista aérea do centro de convenções da PUC (Goiânia),
+       recortada de um criativo oficial da Expo Móvel. -->
+  <figure class="hero__strip" data-reveal data-reveal-delay="120">
+    <div class="hero__strip-img" data-parallax data-parallax-speed="0.07">
+      <picture>
+        <source media="(max-width: 760px)" srcset="assets/img/venue-puc.jpg">
+        <img src="assets/img/hero-puc.jpg" alt="Vista aérea do Centro de Convenções da PUC Goiás, sede da Expo Móvel Goiás" width="1402" height="328" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+    <figcaption>
+      <span class="hero__strip-label">Praça 2027</span>
+      <span class="hero__strip-place">Centro de Convenções da PUC — Goiânia, Goiás</span>
+    </figcaption>
+  </figure>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="hero__scroll-line"></span>
+    <span class="hero__scroll-label">Role</span>
+  </div>
+</section>
+
+<!-- ============ 03 · MANIFESTO ============ -->
+<section class="manifesto" id="manifesto">
+  <div class="manifesto__rail" data-manifesto-rail>
+    <div class="manifesto__stage">
+
+      <p class="section-label" data-reveal>
+        <span class="section-label__num">01</span>
+        <span class="section-label__txt">Manifesto</span>
+      </p>
+
+      <div class="manifesto__lines">
+        <p class="manifesto__line" data-manifesto-line><span>Três dias.</span></p>
+        <p class="manifesto__line" data-manifesto-line><span>Cinco feiras.</span></p>
+        <p class="manifesto__line" data-manifesto-line><span>Mais de 20 mil visitantes.</span></p>
+        <p class="manifesto__line manifesto__line--wide" data-manifesto-line><span>Um mercado inteiro <em>em movimento</em>.</span></p>
+      </div>
+
+      <p class="manifesto__transition" data-reveal-delay="120">
+        E, no centro de tudo, quem faz o mercado acontecer:
+      </p>
+
+      <ul class="manifesto__roles">
+        <li data-reveal><span class="manifesto__role-idx">01</span>Fabricantes</li>
+        <li data-reveal><span class="manifesto__role-idx">02</span>Representantes</li>
+        <li data-reveal><span class="manifesto__role-idx">03</span>Lojistas</li>
+        <li data-reveal><span class="manifesto__role-idx">04</span>Atacadistas</li>
+        <li class="manifesto__roles-last" data-reveal><span class="manifesto__role-idx">05</span>E oportunidades</li>
+      </ul>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · O QUE É ============ -->
+<section class="about section surface-yellow" id="sobre" data-surface="yellow">
+  <div class="shell">
+
+    <header class="section-head">
+      <p class="section-label" data-reveal>
+        <span class="section-label__num">02</span>
+        <span class="section-label__txt">A feira</span>
+      </p>
+      <h2 class="section-title" data-reveal-mask>
+        <span class="line"><span class="line__in">Uma feira feita</span></span>
+        <span class="line"><span class="line__in">para <em>gerar negócios</em>.</span></span>
+      </h2>
+      <p class="section-lead" data-reveal data-reveal-delay="120">
+        A Expo Móvel cria eventos voltados à geração de oportunidades de negócios. Seu formato de
+        feiras é direcionado à realização de negócios, reunindo marcas do setor moveleiro, ampliando
+        parcerias e criando oportunidades de atualização e networking.
+      </p>
+    </header>
+
+    <div class="about__body">
+      <div class="about__col" data-reveal>
+        <p>
+          Ao longo dos anos, a Expo Móvel tornou-se uma forma de apresentação de produtos e empresas
+          para o mercado moveleiro. Os eventos contam com a participação de indústrias, lojistas,
+          atacadistas, clientes e representantes.
+        </p>
+      </div>
+      <div class="about__col" data-reveal data-reveal-delay="120">
+        <p>
+          A Expo Móvel reúne, durante 3 dias, integrantes do trade moveleiro, formando um ambiente
+          entre fabricantes, representantes comerciais e lojistas.
+        </p>
+      </div>
+    </div>
+
+    <div class="about__sectors">
+      <h3 class="about__subtitle" data-reveal>Principais setores</h3>
+      <ul class="sectors">
+        <li class="sector" data-reveal>
+          <span class="sector__idx">01</span>
+          <span class="sector__name">Móveis</span>
+          <span class="sector__line" aria-hidden="true"></span>
+        </li>
+        <li class="sector" data-reveal data-reveal-delay="90">
+          <span class="sector__idx">02</span>
+          <!-- O hífen invisível (&shy;) é um ponto de quebra OPCIONAL:
+               só aparece se o card for estreito demais para a palavra
+               inteira. Em desktop largo lê-se ELETRODOMÉSTICOS numa
+               linha, sem hífen; abaixo disso vira ELETRO-/DOMÉSTICOS
+               em vez de ser cortado pela borda do card. -->
+          <span class="sector__name">Eletro&shy;domésticos</span>
+          <span class="sector__line" aria-hidden="true"></span>
+        </li>
+        <li class="sector" data-reveal data-reveal-delay="180">
+          <span class="sector__idx">03</span>
+          <span class="sector__name">Colchões</span>
+          <span class="sector__line" aria-hidden="true"></span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="about__map" data-reveal>
+      <h3 class="about__subtitle">Onde a Expo Móvel acontece</h3>
+      <ul class="states">
+        <li><span class="states__uf">PE</span> Pernambuco</li>
+        <li><span class="states__uf">CE</span> Ceará</li>
+        <li><span class="states__uf">MA</span> Maranhão</li>
+        <li><span class="states__uf">GO</span> Goiás</li>
+      </ul>
+      <p class="about__regions">
+        A operação conecta as regiões <strong>Norte</strong>, <strong>Nordeste</strong> e
+        <strong>Centro-Oeste</strong> do Brasil.
+      </p>
+    </div>
+
+    <!-- Panorama aéreo real de uma edição em Goiânia, recortado de um
+         criativo oficial: mostra a escala do pavilhão e do estacionamento. -->
+    <figure class="about__pano" data-reveal>
+      <div class="about__pano-img" data-parallax data-parallax-speed="0.06">
+        <img src="assets/img/pavilhao-aereo.jpg" alt="Vista aérea do pavilhão e do estacionamento lotado durante a Expo Móvel Goiás" width="1400" height="372" loading="lazy" decoding="async">
+      </div>
+      <figcaption>
+        <span class="about__pano-label">Movimento real</span>
+        <span class="about__pano-place">Pavilhão e acessos durante uma edição da Expo Móvel</span>
+      </figcaption>
+    </figure>
+
+  </div>
+</section>
+
+<!-- ============ 05 · NÚMEROS ============ -->
+<section class="numbers section surface-navy" id="numeros" data-surface="navy">
+  <div class="numbers__glow" aria-hidden="true"></div>
+  <div class="shell">
+
+    <p class="section-label section-label--center" data-reveal>
+      <span class="section-label__num">03</span>
+      <span class="section-label__txt">Em números</span>
+    </p>
+
+    <div class="stats">
+      <article class="stat" data-reveal>
+        <p class="stat__value"><span class="stat__prefix">+</span><span data-count="500">0</span></p>
+        <p class="stat__label">expositores</p>
+      </article>
+      <article class="stat" data-reveal data-reveal-delay="90">
+        <p class="stat__value"><span data-count="5" data-count-pad="2">0</span></p>
+        <p class="stat__label">grandes feiras</p>
+      </article>
+      <article class="stat" data-reveal data-reveal-delay="180">
+        <p class="stat__value"><span class="stat__prefix">+</span><span data-count="20">0</span><span class="stat__suffix">mil</span></p>
+        <p class="stat__label">clientes e visitantes</p>
+      </article>
+      <article class="stat" data-reveal data-reveal-delay="270">
+        <p class="stat__value"><span class="stat__prefix">R$</span><span data-count="400">0</span><span class="stat__suffix">milhões</span></p>
+        <p class="stat__label">em volume de vendas</p>
+      </article>
+    </div>
+
+    <p class="numbers__note" data-reveal>
+      Números divulgados oficialmente pela Expo Móvel.
+    </p>
+
+  </div>
+</section>
+
+<!-- ============ 06 · CALENDÁRIO 2027 ============ -->
+<section class="journey surface-dark" id="calendario" data-journey data-surface="dark">
+  <div class="shell journey__head">
+    <p class="section-label" data-reveal>
+      <span class="section-label__num">04</span>
+      <span class="section-label__txt">Calendário 2027</span>
+    </p>
+    <h2 class="section-title" data-reveal-mask>
+      <span class="line"><span class="line__in">Cinco encontros.</span></span>
+      <span class="line"><span class="line__in">Um circuito pelo <em>Brasil</em>.</span></span>
+    </h2>
+    <p class="section-lead" data-reveal data-reveal-delay="120">
+      De Caruaru a Goiânia, a Expo Móvel percorre quatro estados em 2027. Acompanhe a rota.
+    </p>
+  </div>
+
+  <div class="journey__rail" data-journey-rail>
+    <div class="journey__stage">
+
+      <div class="journey__canvas" aria-hidden="true">
+        <svg class="journey__svg" data-journey-svg viewBox="0 0 1000 420" preserveAspectRatio="none">
+          <path class="journey__path-bg" data-journey-path-bg d=""></path>
+          <path class="journey__path" data-journey-path d=""></path>
+        </svg>
+        <div class="journey__coords"></div>
+      </div>
+
+      <ol class="journey__list" data-journey-list>
+
+        <li class="stop" data-stop="0" data-event="caruaru-fev"
+            data-x="8" data-y="30">
+          <span class="stop__node" aria-hidden="true"></span>
+          <span class="stop__when"><b>25 — 27</b> Fev 2027</span>
+          <h3 class="stop__city">Caruaru</h3>
+          <p class="stop__meta">Pernambuco · Polo Caruaru</p>
+          <p class="stop__event">Expo Móvel Nordeste</p>
+          <button class="stop__cta" type="button" data-credential="caruaru-fev">
+            Credenciar-se
+            <svg viewBox="0 0 16 16" aria-hidden="true" width="12" height="12"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </li>
+
+        <li class="stop" data-stop="1" data-event="sao-luis"
+            data-x="29" data-y="76">
+          <span class="stop__node" aria-hidden="true"></span>
+          <span class="stop__when"><b>10 — 12</b> Mar 2027</span>
+          <h3 class="stop__city">São Luís</h3>
+          <p class="stop__meta">Maranhão · Multicenter Sebrae</p>
+          <p class="stop__event">Expo Móvel</p>
+          <button class="stop__cta" type="button" data-credential="sao-luis">
+            Credenciar-se
+            <svg viewBox="0 0 16 16" aria-hidden="true" width="12" height="12"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </li>
+
+        <li class="stop" data-stop="2" data-event="fortaleza"
+            data-x="50" data-y="24">
+          <span class="stop__node" aria-hidden="true"></span>
+          <span class="stop__when"><b>05 — 07</b> Mai 2027</span>
+          <h3 class="stop__city">Fortaleza</h3>
+          <p class="stop__meta">Ceará · Centro de Convenções do Ceará</p>
+          <p class="stop__event">Expo Móvel Ceará</p>
+          <button class="stop__cta" type="button" data-credential="fortaleza">
+            Credenciar-se
+            <svg viewBox="0 0 16 16" aria-hidden="true" width="12" height="12"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </li>
+
+        <li class="stop" data-stop="3" data-event="caruaru-ago"
+            data-x="71" data-y="72">
+          <span class="stop__node" aria-hidden="true"></span>
+          <span class="stop__when"><b>12 — 14</b> Ago 2027</span>
+          <h3 class="stop__city">Caruaru</h3>
+          <p class="stop__meta">Pernambuco · Polo Caruaru</p>
+          <p class="stop__event">Expo Móvel Pernambuco</p>
+          <button class="stop__cta" type="button" data-credential="caruaru-ago">
+            Credenciar-se
+            <svg viewBox="0 0 16 16" aria-hidden="true" width="12" height="12"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </li>
+
+        <li class="stop" data-stop="4" data-event="goiania"
+            data-x="86" data-y="20">
+          <span class="stop__node" aria-hidden="true"></span>
+          <span class="stop__when"><b>15 — 17</b> Set 2027</span>
+          <h3 class="stop__city">Goiânia</h3>
+          <p class="stop__meta">Goiás · Centro de Convenções da PUC</p>
+          <p class="stop__event">Expo Móvel Goiás</p>
+          <button class="stop__cta" type="button" data-credential="goiania">
+            Credenciar-se
+            <svg viewBox="0 0 16 16" aria-hidden="true" width="12" height="12"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </li>
+
+      </ol>
+
+      <div class="journey__hud" aria-hidden="true">
+        <span class="journey__hud-meta">Rota 2027</span>
+        <span class="journey__hud-count"><b data-journey-index>01</b> / 05</span>
+        <span class="journey__hud-bar"><i data-journey-bar></i></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell journey__foot">
+    <p class="journey__foot-note" data-reveal>
+      Datas confirmadas pela Expo Móvel para 2027. O credenciamento de expositor, representante e lojista é feito aqui mesmo, nesta página.
+    </p>
+    <a class="btn btn--gold" href="#credenciamento" data-magnetic><span>Quero participar de 2027</span></a>
+  </div>
+</section>
+
+<!-- ============ 07 · CONEXÃO ============ -->
+<section class="chain section surface-paper" id="conexao" data-surface="paper">
+  <div class="shell">
+    <header class="section-head section-head--center">
+      <p class="section-label section-label--center" data-reveal>
+        <span class="section-label__num">05</span>
+        <span class="section-label__txt">Conexão</span>
+      </p>
+      <h2 class="section-title section-title--center" data-reveal-mask>
+        <span class="line"><span class="line__in">Onde o mercado</span></span>
+        <span class="line"><span class="line__in">se <em>encontra</em>.</span></span>
+      </h2>
+    </header>
+
+    <ol class="chain__flow" data-chain>
+      <li class="chain__step" data-reveal>
+        <span class="chain__dot" aria-hidden="true"></span>
+        <h3 class="chain__title">Indústria</h3>
+        <p class="chain__desc">Fabricantes que produzem móveis, eletrodomésticos e colchões.</p>
+      </li>
+      <li class="chain__step" data-reveal data-reveal-delay="90">
+        <span class="chain__dot" aria-hidden="true"></span>
+        <h3 class="chain__title">Representantes</h3>
+        <p class="chain__desc">Representantes comerciais que levam o produto até o ponto de venda.</p>
+      </li>
+      <li class="chain__step" data-reveal data-reveal-delay="180">
+        <span class="chain__dot" aria-hidden="true"></span>
+        <h3 class="chain__title">Lojistas</h3>
+        <p class="chain__desc">Lojistas e atacadistas que escolhem o que vai para as suas lojas.</p>
+      </li>
+      <li class="chain__step" data-reveal data-reveal-delay="270">
+        <span class="chain__dot" aria-hidden="true"></span>
+        <h3 class="chain__title">Negócios</h3>
+        <p class="chain__desc">Parcerias fechadas, mercado ampliado e relacionamento construído.</p>
+      </li>
+      <span class="chain__track" aria-hidden="true"><i data-chain-fill></i></span>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 08 · PARA QUEM É ============ -->
+<section class="audience section surface-paper" id="publico" data-surface="paper">
+  <div class="shell">
+    <header class="section-head">
+      <p class="section-label" data-reveal>
+        <span class="section-label__num">06</span>
+        <span class="section-label__txt">Para quem é</span>
+      </p>
+      <h2 class="section-title" data-reveal-mask>
+        <span class="line"><span class="line__in">Três formas de</span></span>
+        <span class="line"><span class="line__in">participar do <em>circuito</em>.</span></span>
+      </h2>
+    </header>
+
+    <div class="audience__grid">
+
+      <article class="profile" data-reveal>
+        <p class="profile__idx">01</p>
+        <h3 class="profile__name">Expositor</h3>
+        <p class="profile__role">Indústria e fabricante</p>
+        <p class="profile__desc">
+          Apresente sua marca durante três dias para um público que vai até a feira para comprar.
+          Produtos expostos, marcas visíveis e negociação direta no stand.
+        </p>
+        <ul class="profile__list">
+          <li>Presença da marca no pavilhão</li>
+          <li>Contato direto com representantes e lojistas</li>
+          <li>Um estado por edição, um mercado por vez</li>
+        </ul>
+      </article>
+
+      <article class="profile profile--accent" data-reveal data-reveal-delay="110">
+        <p class="profile__idx">02</p>
+        <h3 class="profile__name">Representante</h3>
+        <p class="profile__role">Representante comercial</p>
+        <p class="profile__desc">
+          Conecte indústria e mercado. A feira é o ponto de encontro entre quem produz e quem
+          distribui — o lugar certo para ampliar carteira e fechar parcerias.
+        </p>
+        <ul class="profile__list">
+          <li>Relacionamento com a indústria</li>
+          <li>Novas parcerias comerciais</li>
+          <li>Acesso a lojistas e atacadistas da região</li>
+        </ul>
+      </article>
+
+      <article class="profile" data-reveal data-reveal-delay="220">
+        <p class="profile__idx">03</p>
+        <h3 class="profile__name">Lojista</h3>
+        <p class="profile__role">Lojista e atacadista</p>
+        <p class="profile__desc">
+          Encontre produtos, parceiros e oportunidades. Em um só lugar, você vê lançamentos,
+          compara fornecedores e negocia direto com a indústria.
+        </p>
+        <ul class="profile__list">
+          <li>Lançamentos e novidades do setor</li>
+          <li>Negociação direta com fabricantes</li>
+          <li>Fornecedores reunidos no mesmo pavilhão</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 · CREDENCIAMENTO ============ -->
+<section class="enroll section surface-yellow" id="credenciamento" data-surface="yellow">
+  <div class="enroll__glow" aria-hidden="true"></div>
+  <div class="shell">
+    <header class="section-head section-head--center">
+      <p class="section-label section-label--center" data-reveal>
+        <span class="section-label__num">07</span>
+        <span class="section-label__txt">Credenciamento</span>
+      </p>
+      <h2 class="section-title section-title--center" data-reveal-mask>
+        <span class="line"><span class="line__in">Escolha como</span></span>
+        <span class="line"><span class="line__in">você <em>participa</em>.</span></span>
+      </h2>
+      <p class="section-lead section-lead--center" data-reveal data-reveal-delay="120">
+        Preencha o credenciamento aqui mesmo, sem sair da página. Leva menos de dois minutos.
+      </p>
+      <p class="enroll__go" data-reveal data-reveal-delay="180">
+        <button class="btn btn--gold btn--lg" type="button" data-credential="abrir" data-magnetic>
+          <span>Iniciar credenciamento</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </p>
+    </header>
+
+    <div class="enroll__grid">
+
+      <article class="enroll__card" data-reveal>
+        <p class="enroll__tag">Expositor</p>
+        <h3 class="enroll__title">Apresente a sua marca.</h3>
+        <p class="enroll__desc">
+          Reserve seu stand e coloque seus produtos na frente de quem compra para lojas de todo o
+          estado.
+        </p>
+        <!-- Os rótulos longos usam NBSP para manter "Credenciar como"
+             junto numa linha; a última palavra pode descer sozinha. Sem
+             isso o `.btn` (nowrap + overflow:hidden) cortava o texto
+             entre 1180px e ~430px, onde o card não comporta a frase
+             inteira em uma linha. -->
+        <button class="btn btn--gold btn--block btn--wrap" type="button" data-credential="expositor" data-magnetic>
+          <span>Credenciar&nbsp;como expositor</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </article>
+
+      <article class="enroll__card enroll__card--feature" data-reveal data-reveal-delay="110">
+        <p class="enroll__tag">Representante</p>
+        <h3 class="enroll__title">Conecte indústria e mercado.</h3>
+        <p class="enroll__desc">
+          Credencie-se como representante comercial e amplie a sua atuação dentro do trade
+          moveleiro.
+        </p>
+        <button class="btn btn--gold btn--block btn--wrap" type="button" data-credential="representante" data-magnetic>
+          <span>Credenciar&nbsp;como representante</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </article>
+
+      <article class="enroll__card" data-reveal data-reveal-delay="220">
+        <p class="enroll__tag">Lojista</p>
+        <h3 class="enroll__title">Encontre produtos e parceiros.</h3>
+        <p class="enroll__desc">
+          Faça o seu credenciamento e acesse o pavilhão para negociar direto com a indústria.
+        </p>
+        <button class="btn btn--gold btn--block btn--wrap" type="button" data-credential="lojista" data-magnetic>
+          <span>Credenciar&nbsp;como lojista</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </article>
+
+    </div>
+
+    <noscript>
+      <p class="enroll__note enroll__note--noscript">
+        O credenciamento nesta página precisa de JavaScript. Para se credenciar agora,
+        escreva para <a href="mailto:comercial@expomovel.com.br">comercial@expomovel.com.br</a>
+        informando o seu perfil (expositor, representante ou lojista) e a feira de 2027 desejada.
+      </p>
+    </noscript>
+
+    <p class="enroll__note" data-reveal>
+      Credenciamento gratuito e exclusivo para profissionais do setor moveleiro.
+      Em caso de dúvida, fale com o comercial pelo
+      <a href="mailto:comercial@expomovel.com.br">comercial@expomovel.com.br</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 10 · GALERIA ============ -->
+<section class="gallery section surface-dark" id="galeria" data-surface="dark">
+  <div class="shell">
+    <header class="section-head">
+      <p class="section-label" data-reveal>
+        <span class="section-label__num">08</span>
+        <span class="section-label__txt">A feira por dentro</span>
+      </p>
+      <h2 class="section-title" data-reveal-mask>
+        <span class="line"><span class="line__in">O que acontece</span></span>
+        <span class="line"><span class="line__in">nesses <em>três dias</em>.</span></span>
+      </h2>
+    </header>
+  </div>
+
+  <div class="gallery__board" data-gallery>
+
+    <figure class="shot" data-shot data-reveal>
+      <div class="shot__img" data-parallax data-parallax-speed="0.07">
+        <img src="assets/img/feira-negociacao.jpg" alt="Expositor e visitante negociando ao lado de um colchão em um estande da feira" width="554" height="530" loading="lazy" decoding="async">
+      </div>
+      <figcaption>Negociação no pavilhão</figcaption>
+    </figure>
+
+    <figure class="shot" data-shot data-reveal data-reveal-delay="70">
+      <div class="shot__img" data-parallax data-parallax-speed="0.05">
+        <img src="assets/img/feira-corredor.jpg" alt="Corredor da feira com público entre estandes de marcas expositoras" width="338" height="390" loading="lazy" decoding="async">
+      </div>
+      <figcaption>Corredor de estandes</figcaption>
+    </figure>
+
+    <figure class="shot" data-shot data-reveal data-reveal-delay="130">
+      <div class="shot__img" data-parallax data-parallax-speed="0.09">
+        <img src="assets/img/feira-estandes.jpg" alt="Estandes de expositores com colchões e mobiliário em exibição" width="252" height="460" loading="lazy" decoding="async">
+      </div>
+      <figcaption>Marcas expositoras</figcaption>
+    </figure>
+
+    <figure class="shot" data-shot data-reveal data-reveal-delay="190">
+      <div class="shot__img" data-parallax data-parallax-speed="0.06">
+        <img src="assets/img/feira-equipe.jpg" alt="Equipe de expositor atendendo lojistas em mesa de negociação" width="536" height="362" loading="lazy" decoding="async">
+      </div>
+      <figcaption>Atendimento no stand</figcaption>
+    </figure>
+
+    <figure class="shot" data-shot data-reveal data-reveal-delay="250">
+      <div class="shot__img" data-parallax data-parallax-speed="0.08">
+        <img src="assets/img/publico-feira.jpg" alt="Público circulando entre estandes durante uma edição da Expo Móvel" width="512" height="662" loading="lazy" decoding="async">
+      </div>
+      <figcaption>Público em circulação</figcaption>
+    </figure>
+
+    <figure class="shot" data-shot data-reveal data-reveal-delay="310">
+      <div class="shot__img" data-parallax data-parallax-speed="0.04">
+        <img src="assets/img/feira-pedidos.jpg" alt="Mãos conferindo valores em calculadora sobre pedidos durante a feira" width="547" height="266" loading="lazy" decoding="async">
+      </div>
+      <figcaption>Pedidos e fechamento</figcaption>
+    </figure>
+
+  </div>
+
+  <div class="shell">
+    <div class="gallery__venues">
+      <figure class="venue" data-reveal>
+        <div class="venue__img"><img src="assets/img/pavilhao-parking.jpg" alt="Vista aérea do estacionamento e do acesso ao pavilhão durante a feira" width="518" height="310" loading="lazy" decoding="async"></div>
+        <figcaption><b>Acesso e estacionamento</b> Polo Caruaru · Pernambuco</figcaption>
+      </figure>
+      <figure class="venue" data-reveal data-reveal-delay="90">
+        <div class="venue__img"><img src="assets/img/feira-credenciamento.jpg" alt="Lojista com crachá de identificação preenchendo o cadastro na entrada da feira" width="528" height="356" loading="lazy" decoding="async"></div>
+        <figcaption><b>Credenciamento</b> Identificação do lojista na entrada</figcaption>
+      </figure>
+      <figure class="venue" data-reveal data-reveal-delay="180">
+        <div class="venue__img"><img src="assets/img/planta-feira.jpg" alt="Planta do pavilhão com a distribuição dos estandes por ruas" width="880" height="670" loading="lazy" decoding="async"></div>
+        <figcaption><b>Planta do pavilhão</b> Estandes distribuídos por ruas</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 · INSTITUCIONAL ============ -->
+<section class="institution section surface-paper" id="institucional" data-surface="paper">
+  <div class="shell">
+    <header class="section-head">
+      <p class="section-label" data-reveal>
+        <span class="section-label__num">09</span>
+        <span class="section-label__txt">Institucional</span>
+      </p>
+    </header>
+
+    <div class="institution__grid">
+
+      <article class="pillar" data-reveal>
+        <h3 class="pillar__title"><span>Missão</span></h3>
+        <p class="pillar__text">
+          Realizar feiras corporativas no segmento moveleiro com compromisso com altos padrões
+          éticos, técnicos, de produtividade, administração e eficiência.
+        </p>
+      </article>
+
+      <article class="pillar" data-reveal data-reveal-delay="110">
+        <h3 class="pillar__title"><span>Visão</span></h3>
+        <p class="pillar__text">
+          Estar entre as principais escolhas dos clientes para conceber e concretizar feiras
+          corporativas inovadoras, sustentáveis e com alto volume de negócios para os mercados
+          nacional e internacional.
+        </p>
+      </article>
+
+      <article class="pillar pillar--values" data-reveal data-reveal-delay="220">
+        <h3 class="pillar__title"><span>Valores</span></h3>
+        <ul class="values">
+          <li>Confiança</li>
+          <li>Espírito de equipe</li>
+          <li>Integridade</li>
+          <li>Ética</li>
+          <li>Honestidade</li>
+          <li>Transparência</li>
+          <li>Satisfação de clientes, parceiros, colaboradores e sócios</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 · CONTATO ============ -->
+<section class="contact section surface-light" id="contato" data-surface="light">
+  <div class="shell">
+    <header class="section-head">
+      <p class="section-label" data-reveal>
+        <span class="section-label__num">10</span>
+        <span class="section-label__txt">Contato</span>
+      </p>
+      <h2 class="section-title" data-reveal-mask>
+        <span class="line"><span class="line__in">Fale com a</span></span>
+        <span class="line"><span class="line__in"><em>Expo Móvel</em>.</span></span>
+      </h2>
+    </header>
+
+    <div class="contact__grid">
+
+      <article class="contact__block" data-reveal>
+        <h3 class="contact__title">Departamento comercial</h3>
+        <p class="contact__line">
+          <a href="tel:+5581988756207">(81) 9.8875-6207</a>
+        </p>
+        <p class="contact__line">
+          <a href="mailto:comercial@expomovel.com.br">comercial@expomovel.com.br</a>
+        </p>
+      </article>
+
+      <article class="contact__block" data-reveal data-reveal-delay="90">
+        <h3 class="contact__title">Departamento financeiro</h3>
+        <p class="contact__line">
+          <a href="tel:+5581992718892">(81) 9.9271-8892</a>
+        </p>
+        <p class="contact__line">
+          <a href="mailto:financeiro@expomovel.com.br">financeiro@expomovel.com.br</a>
+        </p>
+      </article>
+
+      <article class="contact__block" data-reveal data-reveal-delay="180">
+        <h3 class="contact__title">Endereço</h3>
+        <p class="contact__line contact__line--plain">
+          Rua Artur Mendonça, 38 — Centro<br>
+          Moreno — PE<br>
+          CEP 54.800-000
+        </p>
+      </article>
+
+      <article class="contact__block" data-reveal data-reveal-delay="270">
+        <h3 class="contact__title">Sede administrativa</h3>
+        <p class="contact__line contact__line--plain">
+          Recife Outlet<br>
+          Rod. Luiz Gonzaga, KM 20 — BR 232<br>
+          Moreno — PE · CEP 54803-901
+        </p>
+      </article>
+
+    </div>
+
+    <p class="contact__insta" data-reveal>
+      <a href="https://www.instagram.com/expomovel/" target="_blank" rel="noopener noreferrer">
+        @expomovel
+      </a>
+      <span aria-hidden="true">·</span>
+      <a href="https://expomovel.com.br/" target="_blank" rel="noopener noreferrer">expomovel.com.br</a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ FAIXA DE MARCA (passagem para o encerramento) ============ -->
+<section class="brandband" aria-label="Expo Móvel 2027">
+  <div class="shell brandband__inner">
+    <p class="brandband__word">Expo Móvel <em>2027</em></p>
+    <p class="brandband__meta">
+      <span><i class="brandband__dot" aria-hidden="true"></i>Cinco feiras</span>
+      <span><b>PE</b> · <b>MA</b> · <b>CE</b> · <b>GO</b></span>
+      <span>O mercado se encontra aqui</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ 13 · FINAL ============ -->
+<section class="final" id="final">
+  <canvas class="final__canvas" data-final-canvas aria-hidden="true"></canvas>
+  <div class="final__vignette" aria-hidden="true"></div>
+
+  <div class="final__inner">
+    <p class="final__typed" data-final-typed>
+      <span data-final-text></span><i class="final__caret" data-final-caret></i>
+    </p>
+
+    <p class="final__ghost" aria-hidden="true">Nos vemos na Expo Móvel.</p>
+
+    <div class="final__brand" data-final-brand>
+      <img class="final__logo" src="assets/img/logo-expo-movel-light.png" alt="Expo Móvel" width="1800" height="534" loading="lazy" decoding="async">
+      <p class="final__year">2027</p>
+    </div>
+
+    <div class="final__cta" data-final-cta>
+      <a class="btn btn--gold btn--lg" href="#credenciamento" data-magnetic><span>Quero participar</span></a>
+      <a class="btn btn--line" href="#calendario">Ver o calendário</a>
+    </div>
+
+    <p class="sr-only">Grandes negócios começam com um encontro. Nos vemos na Expo Móvel 2027.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ CREDENCIAMENTO INTERNO (modal multi-etapa) ============ -->
+<div class="cred" id="cred" hidden>
+  <div class="cred__scrim" data-cred-close></div>
+
+  <div class="cred__panel" role="dialog" aria-modal="true" aria-labelledby="credTitle" data-cred-panel>
+    <header class="cred__head">
+      <!-- O painel é sempre claro: aqui cabe a marca em cores
+           oficiais (verde + azul-marinho), não a silhueta. -->
+      <span class="wordmark wordmark--sm">
+        <img class="wordmark-color" src="assets/img/logo-expo-movel.png" alt="Expo Móvel" width="1800" height="534" decoding="async">
+      </span>
+      <h2 class="cred__title" id="credTitle">Credenciamento 2027</h2>
+      <button class="cred__close" type="button" data-cred-close aria-label="Fechar credenciamento">
+        <svg viewBox="0 0 16 16" aria-hidden="true" width="15" height="15"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </header>
+
+    <!-- Trilha de etapas -->
+    <ol class="cred__steps" data-cred-steps aria-label="Etapas do credenciamento">
+      <li class="cred__step" data-step-dot="1"><i>1</i><span>Perfil</span></li>
+      <li class="cred__step" data-step-dot="2"><i>2</i><span>Evento</span></li>
+      <li class="cred__step" data-step-dot="3"><i>3</i><span>Seus dados</span></li>
+      <li class="cred__step" data-step-dot="4"><i>4</i><span>Empresa</span></li>
+      <li class="cred__step" data-step-dot="5"><i>5</i><span>Revisão</span></li>
+    </ol>
+
+    <div class="cred__body" data-cred-body>
+
+      <!-- ETAPA 1 · PERFIL -->
+      <section class="cred__view" data-step="1">
+        <h3 class="cred__q">Como você participa da feira?</h3>
+        <p class="cred__hint">Escolha o seu perfil. Isso define quais dados vamos pedir.</p>
+        <div class="cred__choices">
+          <button class="choice" type="button" data-pick-profile="expositor">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__name">Expositor</span>
+            <span class="choice__desc">Indústria ou fabricante que expõe no pavilhão.</span>
+          </button>
+          <button class="choice" type="button" data-pick-profile="representante">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__name">Representante</span>
+            <span class="choice__desc">Representante comercial que conecta indústria e loja.</span>
+          </button>
+          <button class="choice" type="button" data-pick-profile="lojista">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__name">Lojista</span>
+            <span class="choice__desc">Lojista ou atacadista que vai ao pavilhão comprar.</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ETAPA 2 · EVENTO -->
+      <section class="cred__view" data-step="2" hidden>
+        <h3 class="cred__q">Em qual feira você vai participar?</h3>
+        <p class="cred__hint">As cinco praças confirmadas de 2027.</p>
+        <div class="cred__choices cred__choices--events">
+          <button class="choice choice--event" type="button" data-pick-event="caruaru-fev">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__when">25 — 27 Fev 2027</span>
+            <span class="choice__name">Caruaru</span>
+            <span class="choice__desc">Pernambuco · Polo Caruaru · Expo Móvel Nordeste</span>
+          </button>
+          <button class="choice choice--event" type="button" data-pick-event="sao-luis">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__when">10 — 12 Mar 2027</span>
+            <span class="choice__name">São Luís</span>
+            <span class="choice__desc">Maranhão · Multicenter Sebrae · Expo Móvel</span>
+          </button>
+          <button class="choice choice--event" type="button" data-pick-event="fortaleza">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__when">05 — 07 Mai 2027</span>
+            <span class="choice__name">Fortaleza</span>
+            <span class="choice__desc">Ceará · Centro de Convenções · Expo Móvel Ceará</span>
+          </button>
+          <button class="choice choice--event" type="button" data-pick-event="caruaru-ago">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__when">12 — 14 Ago 2027</span>
+            <span class="choice__name">Caruaru</span>
+            <span class="choice__desc">Pernambuco · Polo Caruaru · Expo Móvel Pernambuco</span>
+          </button>
+          <button class="choice choice--event" type="button" data-pick-event="goiania">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__when">15 — 17 Set 2027</span>
+            <span class="choice__name">Goiânia</span>
+            <span class="choice__desc">Goiás · Centro de Convenções da PUC · Expo Móvel Goiás</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ETAPA 3 · DADOS PESSOAIS -->
+      <section class="cred__view" data-step="3" hidden>
+        <h3 class="cred__q">Seus dados</h3>
+        <p class="cred__hint">É com esses dados que a sua credencial será emitida.</p>
+
+        <div class="fields">
+          <div class="field field--full">
+            <label for="c-nome">Nome completo <span class="req">*</span></label>
+            <input id="c-nome" name="nome" type="text" autocomplete="name" required data-f="required">
+            <p class="field__err" data-err-for="c-nome"></p>
+          </div>
+
+          <div class="field">
+            <label for="c-cpf">CPF <span class="req">*</span></label>
+            <input id="c-cpf" name="cpf" type="text" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" maxlength="14" required data-f="cpf">
+            <p class="field__err" data-err-for="c-cpf"></p>
+          </div>
+
+          <div class="field">
+            <label for="c-credencial">Nome para a credencial <span class="req">*</span></label>
+            <input id="c-credencial" name="credencial" type="text" maxlength="28" required data-f="required">
+            <p class="field__err" data-err-for="c-credencial"></p>
+          </div>
+
+          <div class="field">
+            <label for="c-cargo">Cargo <span class="req">*</span></label>
+            <input id="c-cargo" name="cargo" type="text" autocomplete="organization-title" required data-f="required">
+            <p class="field__err" data-err-for="c-cargo"></p>
+          </div>
+
+          <div class="field">
+            <label for="c-email">E-mail <span class="req">*</span></label>
+            <input id="c-email" name="email" type="email" autocomplete="email" placeholder="nome@empresa.com.br" required data-f="email">
+            <p class="field__err" data-err-for="c-email"></p>
+          </div>
+
+          <div class="field">
+            <label for="c-telefone">Telefone <span class="req">*</span></label>
+            <input id="c-telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 0000-0000" maxlength="15" required data-f="tel">
+            <p class="field__err" data-err-for="c-telefone"></p>
+          </div>
+
+          <div class="field">
+            <label for="c-whatsapp">WhatsApp <span class="req">*</span></label>
+            <div class="field__row">
+              <input id="c-whatsapp" name="whatsapp" type="tel" inputmode="tel" placeholder="(00) 00000-0000" maxlength="15" required data-f="tel">
+              <button class="field__copy" type="button" data-copy-tel>Mesmo número</button>
+            </div>
+            <p class="field__err" data-err-for="c-whatsapp"></p>
+          </div>
+
+          <!-- Expositor / Representante: empresa de atuação -->
+          <div class="field field--full" data-when="expositor representante">
+            <label for="c-fabrica">Fábrica / empresa <span class="req">*</span></label>
+            <input id="c-fabrica" name="fabrica" type="text" autocomplete="organization" required data-f="required">
+            <p class="field__err" data-err-for="c-fabrica"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETAPA 4 · DADOS DA EMPRESA (só Lojista) -->
+      <section class="cred__view" data-step="4" hidden>
+        <h3 class="cred__q">Dados da sua loja</h3>
+        <p class="cred__hint">Usamos o CNPJ para validar que o credenciamento é profissional.</p>
+
+        <div class="fields">
+          <div class="field">
+            <label for="c-cnpj">CNPJ <span class="req">*</span></label>
+            <input id="c-cnpj" name="cnpj" type="text" inputmode="numeric" placeholder="00.000.000/0000-00" maxlength="18" required data-f="cnpj">
+            <p class="field__err" data-err-for="c-cnpj"></p>
+          </div>
+
+          <div class="field">
+            <label for="c-razao">Razão social <span class="req">*</span></label>
+            <input id="c-razao" name="razao" type="text" required data-f="required">
+            <p class="field__err" data-err-for="c-razao"></p>
+          </div>
+
+          <div class="field">
+            <label for="c-fantasia">Nome fantasia <span class="req">*</span></label>
+            <input id="c-fantasia" name="fantasia" type="text" required data-f="required">
+            <p class="field__err" data-err-for="c-fantasia"></p>
+          </div>
+
+          <div class="field field--full">
+            <label for="c-endereco">Endereço da loja <span class="req">*</span></label>
+            <input id="c-endereco" name="endereco" type="text" autocomplete="street-address" placeholder="Rua, número, bairro" required data-f="required">
+            <p class="field__err" data-err-for="c-endereco"></p>
+          </div>
+
+          <div class="field">
+            <label for="c-cidade">Cidade <span class="req">*</span></label>
+            <input id="c-cidade" name="cidade" type="text" autocomplete="address-level2" required data-f="required">
+            <p class="field__err" data-err-for="c-cidade"></p>
+          </div>
+
+          <div class="field">
+            <label for="c-uf">Estado <span class="req">*</span></label>
+            <select id="c-uf" name="uf" required data-f="required">
+              <option value="">Selecione</option>
+              <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+              <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+              <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+              <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+              <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+              <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+              <option>SP</option><option>SE</option><option>TO</option>
+            </select>
+            <p class="field__err" data-err-for="c-uf"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETAPA 5 · REVISÃO -->
+      <section class="cred__view" data-step="5" hidden>
+        <h3 class="cred__q">Confira antes de enviar</h3>
+        <p class="cred__hint">Se algo estiver errado, volte e corrija.</p>
+        <dl class="review" data-cred-review></dl>
+        <label class="consent">
+          <input type="checkbox" data-cred-consent>
+          <span>Confirmo que os dados acima são verdadeiros e autorizo o uso para emissão da
+          credencial da Expo Móvel.</span>
+        </label>
+        <p class="field__err" data-err-for="consent"></p>
+      </section>
+
+      <!-- SUCESSO -->
+      <section class="cred__view cred__view--done" data-step="done" hidden>
+        <p class="cred__done-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="34" height="34"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </p>
+        <h3 class="cred__q">Pedido de credenciamento pronto</h3>
+        <p class="cred__hint" data-cred-done-text></p>
+        <div class="cred__done-actions">
+          <button class="btn btn--line" type="button" data-cred-copy>
+            <span>Copiar resumo dos dados</span>
+          </button>
+          <button class="btn btn--gold" type="button" data-cred-close>
+            <span>Concluir</span>
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="cred__foot" data-cred-foot>
+      <button class="btn btn--line btn--sm" type="button" data-cred-back hidden>
+        <span>Voltar</span>
+      </button>
+      <p class="cred__progress" data-cred-progress>Etapa 1 de 5</p>
+      <button class="btn btn--gold" type="button" data-cred-next>
+        <span>Continuar</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true" width="13" height="13"><path d="M2 8h10M8 3.5 12.5 8 8 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </footer>
+  </div>
+</div>
+
+<!-- ============ RODAPÉ ============ -->
+<footer class="footer surface-navy">
+  <div class="shell footer__inner">
+    <div class="footer__brand">
+      <span class="wordmark">
+        <img class="wordmark-light" src="assets/img/logo-expo-movel-light.png" alt="Expo Móvel" width="1800" height="534" loading="lazy" decoding="async">
+      </span>
+      <p class="footer__tagline">O mercado se encontra aqui.</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Rodapé">
+      <div>
+        <p class="footer__nav-title">A feira</p>
+        <a href="#manifesto">Manifesto</a>
+        <a href="#sobre">O que é</a>
+        <a href="#numeros">Números</a>
+        <a href="#galeria">Galeria</a>
+      </div>
+      <div>
+        <p class="footer__nav-title">2027</p>
+        <a href="#calendario">Calendário</a>
+        <a href="#conexao">Conexão</a>
+        <a href="#publico">Para quem é</a>
+      </div>
+      <div>
+        <p class="footer__nav-title">Participar</p>
+        <button class="footer__nav-link" type="button" data-credential="expositor">Expositor</button>
+        <button class="footer__nav-link" type="button" data-credential="representante">Representante</button>
+        <button class="footer__nav-link" type="button" data-credential="lojista">Lojista</button>
+      </div>
+      <div>
+        <p class="footer__nav-title">Contato</p>
+        <a href="tel:+5581988756207">(81) 9.8875-6207</a>
+        <a href="mailto:comercial@expomovel.com.br">comercial@expomovel.com.br</a>
+        <a href="https://www.instagram.com/expomovel/" target="_blank" rel="noopener noreferrer">@expomovel</a>
+      </div>
+    </nav>
+
+    <div class="footer__bottom">
+      <p>© <span data-year>2027</span> Expo Móvel. Todos os direitos reservados.</p>
+      <p class="footer__note">
+        Expo Móvel · Feiras corporativas do setor moveleiro
+      </p>
+      <button class="footer__replay" type="button" data-replay-intro>Rever a introdução</button>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/core.js" defer></script>
+<script src="assets/js/intro.js" defer></script>
+<script src="assets/js/journey.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/cred.js" defer></script>
+
+</body>
+</html>

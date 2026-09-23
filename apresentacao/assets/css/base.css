@@ -1,0 +1,551 @@
+/* ============================================================
+   EXPO MÓVEL — base.css
+   Tokens, reset, tipografia. Nenhuma dependência externa.
+   ============================================================ */
+
+:root{
+  /* ---- Paleta oficial ----
+     Valores amostrados das peças oficiais da Expo Móvel:
+     amarelo #F5EE00, verde do símbolo #007A30, azul-marinho #061A5E.
+     O amarelo é a cor da marca — ele é protagonista, não detalhe. */
+  --yellow:      #F5EE00;   /* amarelo de marca (fundo) */
+  --yellow-soft: #FCF872;
+
+  --gold:        #F5E000;   /* acento sobre fundo escuro */
+  --gold-soft:   #FFF27A;
+  --gold-deep:   #C9B800;
+
+  --green:       #007A30;   /* verde do símbolo EXPO */
+  --navy:        #061A5E;   /* azul-marinho da marca */
+  --navy-deep:   #04123F;
+
+  --ink:         #06070A;   /* preto — só intro, apresentação e final */
+  --ink-2:       #0B0D12;   /* grafite */
+  --ink-3:       #12151C;   /* grafite claro */
+
+  --white:       #FFFFFF;
+  --paper:       #F6F3EA;   /* off-white quente dos criativos */
+
+  /* Tokens de texto — trocados por superfície (.surface-light) */
+  --text:        #EDEEF2;
+  --text-soft:   #A9AEBC;
+  /* Contraste medido sobre --ink #06070A e sobre --ink-2 #0B0D12.
+     #6E7484 dava 4,31:1 e 4,16:1 — abaixo do mínimo de 4,5:1 para
+     TEXTO NORMAL. Só que este token não pinta só título grande: ele
+     também pinta `.stop__when` (13,4px, que é texto normal) e notas
+     pequenas em mono. Como um ajuste de cor não pode depender de quem
+     consome o token, o valor sobe até passar nas duas leituras:
+     #7C8494 dá 5,39:1 sobre o preto e 5,20:1 sobre o grafite, e
+     segue visivelmente mais discreto que --text-soft (#A9AEBC,
+     10,2:1). É rebaixamento de croma, não troca de cor: o cinza
+     continua frio, do mesmo lado do azul-marinho da marca. */
+  --text-dim:    #7C8494;
+
+  --line:        rgba(255,255,255,.10);
+  --line-strong: rgba(255,255,255,.18);
+  --gold-line:   rgba(245,224,0,.34);
+
+  --card-bg:     rgba(255,255,255,.032);
+  --card-bg-2:   rgba(255,255,255,.055);
+
+  /* ---- Tipografia ---- */
+  --f-display: "Anton", "Arial Black", "Helvetica Neue", Impact, sans-serif;
+  --f-sans:    "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-body:    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Escala fluida */
+  --t-h1:      clamp(2.6rem, 8.2vw, 8.2rem);
+  --t-h2:      clamp(2.05rem, 5.6vw, 5.2rem);
+  --t-h3:      clamp(1.45rem, 2.6vw, 2.4rem);
+  --t-lead:    clamp(1.02rem, 1.35vw, 1.28rem);
+  --t-body:    clamp(.965rem, 1.08vw, 1.06rem);
+  --t-small:   clamp(.8rem, .9vw, .875rem);
+  --t-micro:   .69rem;
+
+  /* ---- Métrica ---- */
+  --shell:     1440px;
+  --gutter:    clamp(1.15rem, 4.4vw, 4.6rem);
+  --section-y: clamp(5.5rem, 12.5vh, 11rem);
+  --radius:    3px;
+  --radius-lg: 6px;
+
+  /* ---- Movimento ---- */
+  --ease:      cubic-bezier(.22,.61,.36,1);
+  --ease-out:  cubic-bezier(.16,1,.3,1);
+  --ease-in:   cubic-bezier(.7,0,.84,0);
+
+  --nav-h:     70px;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  background:var(--ink);
+}
+html.is-locked,
+html.is-locked body{
+  overflow:hidden;
+  height:100%;
+}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--f-body);
+  font-size:var(--t-body);
+  line-height:1.68;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  position:relative;
+}
+
+h1,h2,h3,h4,h5{
+  margin:0;
+  font-family:var(--f-sans);
+  font-weight:800;
+  line-height:1.02;
+  letter-spacing:-.022em;
+  text-wrap:balance;
+}
+p{ margin:0; }
+ul,ol{ margin:0; padding:0; list-style:none; }
+img,svg,canvas{ display:block; max-width:100%; }
+img{ height:auto; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+figure{ margin:0; }
+
+::selection{ background:var(--navy); color:#FFFFFF; }
+
+:focus-visible{
+  outline:2px solid var(--navy);
+  outline-offset:3px;
+  border-radius:2px;
+}
+.surface-light :focus-visible,
+.surface-paper :focus-visible,
+.surface-yellow :focus-visible{ outline-color:var(--navy); }
+.surface-dark :focus-visible{ outline-color:var(--gold); }
+
+/* ============================================================
+   ACESSIBILIDADE
+   ============================================================ */
+.sr-only{
+  position:absolute!important;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+
+.skip-link{
+  position:fixed;
+  top:-100px; left:1rem;
+  z-index:9999;
+  padding:.75rem 1.15rem;
+  background:var(--gold);
+  color:#0A0800;
+  font-family:var(--f-sans);
+  font-weight:800;
+  font-size:.82rem;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  transition:top .25s var(--ease);
+}
+.skip-link:focus{ top:1rem; }
+
+/* ============================================================
+   TIPOGRAFIA UTILITÁRIA
+   ============================================================ */
+em{
+  font-style:italic;
+  font-weight:800;
+  color:var(--gold);
+  font-family:var(--f-sans);
+}
+
+.shell{
+  width:100%;
+  max-width:var(--shell);
+  margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+
+.section{
+  position:relative;
+  padding-block:var(--section-y);
+}
+
+/* ============================================================
+   SUPERFÍCIES — o ritmo claro/escuro da apresentação
+   ============================================================
+   A marca é amarela. O preto fica reservado para a abertura,
+   as passagens de alto contraste e o encerramento. Cada
+   superfície redefine os tokens de texto, então os componentes
+   não precisam de variantes: herdam a cor do fundo onde estão. */
+.surface-light{
+  --text:        #0C1330;
+  --text-soft:   #3D4666;
+  --text-dim:    #6B7390;
+  --line:        rgba(12,19,48,.14);
+  --line-strong: rgba(12,19,48,.26);
+  --gold-line:   rgba(12,19,48,.3);
+  --card-bg:     rgba(12,19,48,.035);
+  --card-bg-2:   rgba(12,19,48,.06);
+  color:var(--text);
+}
+
+.surface-yellow{
+  --text:        #10142E;
+  --text-soft:   #33385C;
+  --text-dim:    #5B6183;
+  --line:        rgba(16,20,46,.2);
+  --line-strong: rgba(16,20,46,.34);
+  --gold-line:   rgba(16,20,46,.34);
+  --card-bg:     rgba(16,20,46,.045);
+  --card-bg-2:   rgba(16,20,46,.08);
+  background:var(--yellow);
+  color:var(--text);
+}
+
+.surface-paper{
+  --text:        #10142E;
+  --text-soft:   #3B4262;
+  --text-dim:    #6A7188;
+  --line:        rgba(16,20,46,.14);
+  --line-strong: rgba(16,20,46,.26);
+  --gold-line:   rgba(16,20,46,.3);
+  --card-bg:     rgba(255,255,255,.6);
+  --card-bg-2:   rgba(255,255,255,.85);
+  background:var(--paper);
+  color:var(--text);
+}
+
+.surface-dark{
+  background:var(--ink);
+  color:var(--text);
+}
+
+/* Azul-marinho de marca — a terceira cor oficial das peças.
+   Serve de passagem entre o amarelo e o preto. */
+.surface-navy{
+  --text:        #EEF1FA;
+  --text-soft:   #AEB8D8;
+  --text-dim:    #7C88AE;
+  --line:        rgba(255,255,255,.15);
+  --line-strong: rgba(255,255,255,.26);
+  --gold-line:   rgba(245,238,0,.4);
+  --card-bg:     rgba(255,255,255,.055);
+  --card-bg-2:   rgba(255,255,255,.095);
+  background:var(--navy);
+  color:var(--text);
+}
+
+/* Sobre fundo claro o <em> não pode ser amarelo (some no amarelo):
+   vira verde da marca, que tem contraste real sobre claro. */
+.surface-light em,
+.surface-yellow em,
+.surface-paper em{
+  color:var(--green);
+}
+/* ---- Section label (numeral + nome) ---- */
+.section-label{
+  display:flex;
+  align-items:center;
+  gap:.85rem;
+  /* Dentro do palco do manifesto este respiro era o único pedaço do
+     bloco que ainda crescia só pela LARGURA (2.2vw). Numa tela larga
+     e baixa ele ficava grande justamente onde sobra menos altura.
+     Passa a ser limitado pela altura também; o piso e o teto são os
+     mesmos, então nas larguras usuais nada muda. */
+  margin-bottom:clamp(1rem,min(2.2vw,1.6svh),1.9rem);
+  font-family:var(--f-mono);
+  font-size:var(--t-micro);
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+}
+.section-label--center{ justify-content:center; }
+.section-label__num{
+  color:var(--gold);
+  font-weight:500;
+}
+.section-label__num::after{
+  content:"";
+  display:inline-block;
+  width:26px;height:1px;
+  margin-left:.85rem;
+  vertical-align:middle;
+  background:var(--gold-line);
+}
+.section-label__txt{ color:var(--text-soft); }
+
+/* Numeral e filete: sobre claro o amarelo desaparece — vira verde */
+.surface-light .section-label__num,
+.surface-paper .section-label__num,
+.surface-yellow .section-label__num{ color:var(--green); }
+.surface-light .section-label__num::after,
+.surface-paper .section-label__num::after,
+.surface-yellow .section-label__num::after{ background:rgba(12,19,48,.28); }
+
+/* ---- Títulos ---- */
+.section-title{
+  font-family:var(--f-display);
+  font-size:var(--t-h2);
+  font-weight:400;
+  line-height:.93;
+  letter-spacing:-.012em;
+  text-transform:uppercase;
+  max-width:20ch;
+}
+.section-title--center{ margin-inline:auto; text-align:center; }
+.section-title em{
+  font-family:var(--f-display);
+  font-weight:400;
+  text-transform:uppercase;
+  font-style:normal;
+  color:var(--gold);
+}
+/* Sobre amarelo o destaque NÃO pode ser dourado.
+   `.section-title em` tem especificidade 1 classe + 1 elemento —
+   exatamente a mesma de `.surface-yellow em` — e por vir depois
+   no arquivo vencia o empate, pintando a palavra de dourado sobre
+   amarelo: 1,10:1, ou seja, amarelo sobre amarelo, ilegível.
+   Aqui a especificidade é de DUAS classes, então esta regra vence
+   de forma inequívoca, em qualquer ordem de arquivo.
+   O azul-marinho é o par de contraste oficial da marca sobre
+   amarelo (12,99:1) — é o mesmo par usado nos botões. */
+.surface-yellow .section-title em{ color:var(--navy); }
+
+.section-head{ margin-bottom:clamp(2.6rem,5.5vw,4.6rem); }
+.section-head--center{ text-align:center; }
+.section-head--center .section-title{ margin-inline:auto; }
+
+.section-lead{
+  margin-top:clamp(1.3rem,2.4vw,1.9rem);
+  max-width:62ch;
+  font-size:var(--t-lead);
+  line-height:1.66;
+  color:var(--text-soft);
+}
+.section-lead--center{ margin-inline:auto; text-align:center; }
+
+.about__subtitle{
+  font-family:var(--f-mono);
+  font-size:var(--t-micro);
+  font-weight:500;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-bottom:1.4rem;
+}
+
+/* ---- Wordmark (logo real extraído das peças oficiais) ---- */
+.wordmark{
+  --wm-h:1.5rem;
+  display:inline-block;
+  line-height:0;
+}
+.wordmark img{
+  display:block;
+  width:auto;
+  height:var(--wm-h);
+}
+.wordmark--sm{ --wm-h:1.42rem; }
+
+/* Sobre superfícies claras usa a versão azul-marinho;
+   sobre escuras, a versão branca. A versão em cores oficiais
+   (verde + azul-marinho) é usada onde o fundo é sempre claro,
+   como o cabeçalho do credenciamento. */
+.surface-light .wordmark-light,
+.surface-paper .wordmark-light,
+.surface-yellow .wordmark-light{ display:none; }
+.surface-light .wordmark-navy,
+.surface-paper .wordmark-navy,
+.surface-yellow .wordmark-navy{ display:block; }
+.wordmark-navy{ display:none; }
+
+/* Marca do cabeçalho em telas estreitas.
+   Esta regra fica AQUI, e não no layout.css, porque este arquivo é o
+   PRIMEIRO <link> do <head>: uma regra de mesma especificidade escrita
+   no layout.css venceria de todo jeito. O `.nav .wordmark` tem duas
+   classes contra uma de `.wordmark--sm`, então ganha em qualquer ordem
+   — mas deixar o valor no arquivo que não é sobrescrito evita que a
+   próxima pessoa perca tempo procurando por que a marca não encolhe.
+   Motivo: ver a nota completa no @media de 760px do layout.css — com
+   o logo em 1,42rem a barra transbordava a partir de 375px. */
+@media (max-width:760px){
+  .nav .wordmark{ --wm-h:1.1rem; }
+}
+
+/* ---- Botões ---- */
+.btn{
+  --btn-bg:transparent;
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  padding:1.05rem 1.75rem;
+  border:1px solid transparent;
+  border-radius:var(--radius);
+  background:var(--btn-bg);
+  font-family:var(--f-sans);
+  font-size:.795rem;
+  font-weight:800;
+  letter-spacing:.115em;
+  text-transform:uppercase;
+  line-height:1;
+  white-space:nowrap;
+  cursor:pointer;
+  overflow:hidden;
+  transition:color .35s var(--ease), border-color .35s var(--ease),
+             background-color .35s var(--ease), transform .3s var(--ease-out);
+}
+/* Rótulos longos em botões de largura limitada.
+   `.btn` é nowrap + overflow:hidden, então uma frase que não cabe na
+   linha é CORTADA em silêncio — foi o que acontecia com "Credenciar
+   como representante" entre 1180px e ~430px. Para esses botões a
+   quebra é liberada; o NBSP no HTML mantém "Credenciar como" unido,
+   então a quebra acontece antes da última palavra, nunca no meio. */
+.btn--wrap{
+  white-space:normal;
+  text-align:center;
+  line-height:1.34;
+}
+.btn span{ position:relative; z-index:2; }
+.btn svg{ position:relative; z-index:2; transition:transform .38s var(--ease-out); }
+.btn:hover svg{ transform:translateX(3px); }
+
+.btn--sm{ padding:.78rem 1.25rem; font-size:.72rem; }
+.btn--lg{ padding:1.3rem 2.5rem; font-size:.87rem; }
+.btn--block{ width:100%; }
+
+/* Variação: sólido com varredura de luz.
+   Sobre superfície escura é amarelo (aceso); sobre clara é
+   azul-marinho — o par de contraste real: preto sobre amarelo
+   e branco sobre marinho, que é como a marca se apresenta. */
+.btn--gold{
+  --btn-bg:var(--gold);
+  color:#0A0800;
+  font-weight:800;
+}
+.btn--gold::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.72) 48%,transparent 76%);
+  transform:translateX(-130%);
+  transition:transform .82s var(--ease-out);
+}
+.btn--gold:hover{ background:var(--gold-soft); }
+.btn--gold:hover::before{ transform:translateX(130%); }
+
+.surface-light .btn--gold,
+.surface-paper .btn--gold,
+.surface-yellow .btn--gold{
+  --btn-bg:var(--navy);
+  color:#FFFFFF;
+}
+.surface-light .btn--gold:hover,
+.surface-paper .btn--gold:hover,
+.surface-yellow .btn--gold:hover{ background:var(--navy-deep); }
+
+/* Variação: contorno */
+.btn--line{ border-color:var(--line-strong); color:var(--text); }
+.btn--line::before{
+  content:"";
+  position:absolute; inset:0;
+  background:var(--gold);
+  transform:scaleY(0);
+  transform-origin:bottom;
+  transition:transform .44s var(--ease-out);
+}
+.btn--line:hover{ color:#0A0800; border-color:var(--gold); }
+.btn--line:hover::before{ transform:scaleY(1); }
+
+.surface-light .btn--line::before,
+.surface-paper .btn--line::before,
+.surface-yellow .btn--line::before{ background:var(--navy); }
+.surface-light .btn--line:hover,
+.surface-paper .btn--line:hover,
+.surface-yellow .btn--line:hover{ color:#FFFFFF; border-color:var(--navy); }
+
+/* Variação: fantasma (nav) */
+.btn--ghost{ border-color:var(--line-strong); color:var(--text); }
+.btn--ghost::before{
+  content:"";
+  position:absolute; inset:0;
+  background:rgba(255,255,255,.09);
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform .42s var(--ease-out);
+}
+.btn--ghost:hover{ border-color:var(--gold-line); }
+.btn--ghost:hover::before{ transform:scaleX(1); transform-origin:left; }
+
+.surface-light .btn--ghost::before,
+.surface-paper .btn--ghost::before,
+.surface-yellow .btn--ghost::before{ background:rgba(11,20,56,.09); }
+
+/* Sobre amarelo puro o contorno precisa de corpo */
+.surface-yellow .btn--line,
+.surface-yellow .btn--ghost{ border-color:rgba(16,20,46,.42); }
+
+/* ---- Eyebrow ---- */
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.8rem;
+  font-family:var(--f-mono);
+  font-size:var(--t-micro);
+  font-weight:500;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--text-soft);
+}
+.eyebrow--gold{ color:var(--gold); }
+.surface-light .eyebrow--gold,
+.surface-paper .eyebrow--gold,
+.surface-yellow .eyebrow--gold{ color:var(--green); }
+.eyebrow__rule{
+  display:block;
+  width:clamp(24px,4vw,54px);
+  height:1px;
+  background:currentColor;
+  opacity:.7;
+}
+
+/* ============================================================
+   PREFERS-REDUCED-MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+    scroll-behavior:auto!important;
+  }
+
+  /* Nada deve ficar invisível por causa de reveal */
+  [data-reveal],
+  [data-reveal-mask] .line__in,
+  [data-manifesto-line] > span{
+    opacity:1!important;
+    transform:none!important;
+    clip-path:none!important;
+  }
+}

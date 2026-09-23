@@ -1,0 +1,42 @@
+.container {
+  background: rgba(0, 31, 63, 0.6);
+  width: 20vw;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 50vw;
+    display: none;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 4vh;
+  padding: 1.8vw;
+  h2 {
+    color: rgba(240, 240, 240, 0.6);
+    font-weight: 400;
+    font-size: 1.4vw;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+  h5 {
+    color: rgba(240, 240, 240, 0.6);
+    font-weight: 300;
+    font-size: 1vw;
+    padding-bottom: 1.2vh;
+    border-bottom: 1px solid rgba(240, 240, 240, 0.6);
+    cursor: pointer;
+    &.activeLink {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
+  }
+}

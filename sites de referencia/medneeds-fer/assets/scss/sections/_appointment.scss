@@ -1,0 +1,230 @@
+.ul-appointment {
+    background: var(--ul-gray);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    &-row {
+        --bs-gutter-x: clamp(40px, 4.52vw, 86px);
+        --bs-gutter-y: clamp(40px, 4.52vw, 86px);
+    }
+
+    &-map {
+        margin-top: clamp(15px, 1.58vw, 30px);
+
+        iframe {
+            width: 100%;
+            aspect-ratio: 596/252;
+        }
+    }
+
+    &-vectors {
+        img {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .vector-1 {
+            top: 0;
+            left: 0;
+            transform: scaleX(-1);
+        }
+
+        .vector-2 {
+            bottom: 0;
+            right: 0;
+            max-width: clamp(266px, 16.61vw, 316px);
+        }
+    }
+}
+
+
+.ul-appointment-form {
+
+    .ss-main,
+    select,
+    input,
+    textarea {
+        background-color: var(--white);
+        height: clamp(46px, 3.36vw, 64px);
+        border-radius: 4px;
+        border: none;
+        padding: 0 clamp(16px, 1.26vw, 24px);
+        font-size: clamp(13px, 0.84vw, 16px);
+        width: 100%;
+    }
+
+    input,
+    textarea {
+        font-size: 14px;
+    }
+
+    textarea {
+        padding: clamp(14px, 1.05vw, 20px);
+        height: clamp(90px, 5.78vw, 110px);
+
+        &:focus,
+        &:focus-visible,
+        &:focus-within {
+            outline: none;
+        }
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 1000px var(--white) inset !important;
+    }
+
+    .ss-content {
+        top: 0 !important;
+        left: 0 !important;
+
+        &,
+        &.ss-open-below {
+            border-radius: 4px;
+            border: none;
+        }
+
+        .ss-list .ss-option {
+            padding: 8px 15px;
+        }
+
+        .ss-list .ss-option.ss-highlighted,
+        .ss-list .ss-option:not(.ss-disabled).ss-selected {
+            background-color: var(--ul-secondary);
+        }
+    }
+
+    .ss-main .ss-values .ss-placeholder {
+        padding: 0;
+    }
+
+    .ul-checkbox {
+        border-color: var(--ul-gray3);
+        border-radius: 0;
+        width: clamp(15px, 0.95vw, 18px);
+    }
+
+    .ul-btn {
+        background-color: var(--ul-secondary);
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--ul-primary);
+        }
+    }
+}
+
+// INDEX-2 APPOINTMENT
+.ul-2-appointment {
+    &-form-wrapper {
+        background-color: var(--ul-primary);
+        padding: clamp(24px, 2.52vw, 48px);
+        border-radius: clamp(14px, 1.26vw, 24px);
+        color: var(--white);
+
+        .ul-section-sub-title {
+            color: var(--ul-c3);
+
+            &::before {
+                background-color: var(--ul-c3);
+            }
+        }
+
+        .ul-section-title {
+            margin-bottom: clamp(12px, 1.16vw, 22px);
+        }
+
+        .ul-appointment-form {
+
+            .ss-main,
+            select,
+            input,
+            textarea {
+                background-color: rgba(245, 245, 245, 0.08);
+                color: var(--white);
+                color-scheme: dark;
+
+                &::placeholder {
+                    color: var(--white);
+                }
+            }
+
+            .ss-arrow {
+                path {
+                    stroke: var(--white);
+                }
+            }
+
+            .ul-checkbox-wrapper input:checked~.ul-checkbox {
+                background-color: var(--ul-secondary);
+                border-color: var(--ul-secondary);
+            }
+
+            .ul-btn {
+                &:hover {
+                    background-color: var(--ul-c3);
+                    color: var(--ul-primary);
+                }
+            }
+        }
+    }
+
+    &-contact {
+        padding: clamp(28px, 2.94vw, 56px);
+        background-color: var(--ul-c3);
+        border-radius: clamp(16px, 1.26vw, 24px);
+        height: 100%;
+        display: grid;
+        align-content: center;
+        justify-items: start;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url(../img/appointment-2-contact-bg.jpg) no-repeat center center / cover;
+            z-index: -1;
+            opacity: 8%;
+        }
+
+        .ul-2-cta-card-contact {
+            margin-bottom: clamp(16px, 1.68vw, 32px);
+
+            &-icon {
+                background-color: var(--white);
+                border-radius: 50%;
+            }
+        }
+
+        &-descr {
+            font-weight: 400;
+            font-size: clamp(13px, 0.84vw, 16px);
+            line-height: 150%;
+            color: var(--ul-primary);
+            margin-bottom: clamp(24px, 2.52vw, 48px);
+        }
+
+        .ul-btn {
+            background-color: var(--ul-primary);
+            color: var(--white);
+            width: auto;
+
+            &:hover {
+                background-color: var(--ul-secondary);
+                color: var(--white);
+            }
+        }
+    }
+
+    .ul-clients {
+        @include md {
+            margin-top: 30px;
+        }
+    }
+}

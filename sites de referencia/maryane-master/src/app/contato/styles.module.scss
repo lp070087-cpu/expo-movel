@@ -1,0 +1,9 @@
+// app/page.module.scss
+
+.container {
+  width: 100%; // Largura máxima da viewport (tela)
+  height: 100%; // Altura máxima da viewport (tela)
+  margin: 0; // Remove as margens
+  padding: 0; // Remove o espaçamento interno
+  overflow: hidden; // Evita que o conteúdo crie barras de rolagem
+}

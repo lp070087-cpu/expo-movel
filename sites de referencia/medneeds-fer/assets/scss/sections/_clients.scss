@@ -1,0 +1,17 @@
+.ul-clients {
+    background-color: var(--ul-primary);
+    // padding: clamp(26px, 2.73vw, 52px) 0;
+    padding-top: clamp(27px, 2.84vw, 54px);
+    margin-top: clamp(26px, 2.73vw, 52px);
+    border-top: 1px solid rgba(206, 207, 208, 0.48);
+
+    img {
+        filter: grayscale(100%);
+        transition: all 0.3s ease;
+
+        &:hover {
+            opacity: 100%;
+            filter: grayscale(0%);
+        }
+    }
+}

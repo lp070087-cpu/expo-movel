@@ -1,0 +1,250 @@
+// inner team member card styles
+.ul-inner-team-member {
+    border: 1px solid var(--ul-gray);
+    transition: 0.3s ease;
+
+    &:hover {
+        border-color: var(--ul-secondary);
+
+        &::before {
+            background-color: var(--ul-gray);
+        }
+
+        .ul-team-member {
+            &-img {
+                border-color: var(--ul-secondary);
+            }
+
+            &-name a {
+                color: var(--ul-primary);
+            }
+
+            &-role {
+                color: var(--ul-gray2);
+            }
+        }
+    }
+
+    &::before {
+        top: 0;
+    }
+}
+
+.ul-team-details {
+    &-top {
+        padding: 0 clamp(15px, 5.94vw, 113px) clamp(24px, 2.52vw, 48px);
+        border-bottom: 1px solid rgba(206, 207, 208, 0.48);
+
+        @include xxs {
+            padding: 0 0 clamp(24px, 2.52vw, 48px);
+        }
+    }
+
+    &-img {
+        border-radius: 16px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            aspect-ratio: 512/581;
+            object-fit: cover;
+        }
+    }
+
+    &-name {
+        font-family: var(--font-lato);
+        font-weight: 800;
+        font-size: clamp(24px, 2.52vw, 48px);
+        line-height: 117%;
+        letter-spacing: 0.5px;
+        color: var(--ul-primary);
+        margin-bottom: clamp(4px, 0.32vw, 6px);
+    }
+
+    &-position {
+        font-family: var(--font-lato);
+        font-weight: 500;
+        font-size: clamp(17px, 1.05vw, 20px);
+        line-height: 140%;
+        color: var(--ul-secondary);
+        display: block;
+        margin-bottom: clamp(14px, 1.26vw, 24px);
+    }
+
+    &-descr {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 150%;
+        color: var(--ul-gray2);
+        margin-bottom: clamp(16px, 1.68vw, 32px);
+    }
+
+    &-infos {
+        margin-bottom: clamp(24px, 2.52vw, 48px);
+        border: 1px solid rgba(206, 207, 208, 0.48);
+        border-radius: 16px;
+        background-color: rgba(206, 207, 208, 0.48);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+
+        @include xxs {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &-info {
+        background-color: var(--white);
+        padding: clamp(10px, 0.84vw, 16px) clamp(14px, 1.26vw, 24px);
+        display: flex;
+        align-items: center;
+        gap: clamp(10px, 0.95vw, 18px);
+
+        &-icon {
+            font-size: clamp(26px, 1.52vw, 29px);
+            color: var(--ul-secondary);
+        }
+
+        &-txt {
+            .title {
+                font-family: var(--font-lato);
+                font-weight: 600;
+                font-size: clamp(15px, 0.95vw, 18px);
+                line-height: 144%;
+                letter-spacing: 0.5px;
+                color: var(--ul-primary);
+                display: block;
+                margin-bottom: 2px;
+            }
+
+            .value {
+                font-weight: 400;
+                font-size: clamp(13px, 0.84vw, 16px);
+                line-height: 150%;
+                color: var(--ul-gray2);
+            }
+        }
+
+        a:hover {
+            color: var(--ul-secondary);
+        }
+    }
+
+    &-txt .ul-btn {
+        background-color: var(--ul-secondary);
+        display: inline-flex;
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--ul-primary);
+        }
+    }
+
+    &-bottom {
+        padding: clamp(24px, 2.52vw, 48px) clamp(15px, 5.94vw, 113px) 0;
+
+        @include xxs {
+            padding: clamp(24px, 2.52vw, 48px) 0 0;
+        }
+
+        &-block {
+            margin-bottom: clamp(20px, 2.10vw, 40px);
+
+            &-title {
+                font-family: var(--font-lato);
+                font-weight: 800;
+                font-size: clamp(24px, 2.10vw, 40px);
+                line-height: 120%;
+                letter-spacing: 0.5px;
+                color: var(--ul-primary);
+                margin-bottom: clamp(8px, 0.84vw, 16px);
+            }
+
+            &-descr {
+                font-weight: 400;
+                font-size: clamp(13px, 0.84vw, 16px);
+                line-height: 150%;
+                color: var(--ul-gray2);
+                margin-bottom: 0;
+            }
+
+            &-2 {
+                display: flex;
+                gap: clamp(26px, 2.79vw, 53px);
+
+                @include md {
+                    flex-direction: column;
+                }
+            }
+        }
+
+        &-progress {
+            // width: clamp(485px, 25.64vw, 488px);
+            max-width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: clamp(15px, 2.10vw, 40px);
+            flex-shrink: 0;
+
+            .ul-progress-container {
+                width: clamp(133px, 7.15vw, 136px);
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                border: 3px solid #9DAAFF;
+                position: relative;
+            }
+
+            .ul-progressbar {
+                --progress-value: 0%;
+                background: conic-gradient(from 450deg, transparent calc(100% - var(--progress-value)), var(--ul-secondary) 0);
+                aspect-ratio: 1/1;
+                width: auto;
+                height: auto;
+                position: absolute;
+                inset: -3px;
+                border-radius: 50%;
+
+                &::before {
+                    content: none;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: 3px;
+                    background-color: var(--white);
+                    z-index: 1;
+                    border-radius: 50%;
+                }
+            }
+
+            .ul-progress-label {
+                position: absolute;
+                z-index: 2;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+
+                .percent {
+                    font-family: var(--font-lato);
+                    font-style: normal;
+                    font-weight: 800;
+                    font-size: clamp(22px, 2.10vw, 40px);
+                    line-height: 120%;
+                    letter-spacing: 0.5px;
+                    color: var(--ul-primary);
+                }
+
+                .title {
+                    font-weight: 400;
+                    font-size: clamp(13px, 0.84vw, 16px);
+                    line-height: 150%;
+                    color: var(--ul-gray2);
+                }
+            }
+        }
+    }
+}

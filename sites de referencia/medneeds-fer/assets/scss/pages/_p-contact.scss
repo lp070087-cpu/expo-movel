@@ -1,0 +1,129 @@
+.ul-inner-contact {
+    &-info {
+        padding: clamp(24px, 2.52vw, 48px) clamp(15px, 2.52vw, 48px);
+        background: var(--ul-gray);
+        border-radius: 16px;
+        text-align: center;
+        height: 100%;
+
+        .icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: clamp(65px, 4.20vw, 80px);
+            aspect-ratio: 1/1;
+            background: var(--ul-secondary);
+            color: var(--white);
+            border-radius: 999px;
+            font-size: clamp(22px, 1.42vw, 27px);
+            margin-bottom: clamp(14px, 1.26vw, 24px);
+        }
+
+        .descr {
+            margin-bottom: 5px;
+
+            &,
+            a {
+                font-weight: 400;
+                font-size: clamp(13px, 0.84vw, 16px);
+                line-height: 150%;
+                text-align: center;
+                color: var(--ul-gray2);
+            }
+
+            a:hover {
+                color: var(--ul-secondary);
+            }
+        }
+    }
+
+    &-map {
+        height: 100%;
+        border-radius: clamp(12px, 0.84vw, 16px) 0 0 clamp(12px, 0.84vw, 16px);
+        overflow: hidden;
+
+        @include md {
+            border-radius: clamp(12px, 0.84vw, 16px) clamp(12px, 0.84vw, 16px) 0 0;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+
+            @include md {
+                aspect-ratio: 16/6;
+            }
+
+            @include xxs {
+                aspect-ratio: 1/0.7;
+            }
+        }
+    }
+
+    &-form {
+        &-wrapper {
+            background-color: var(--ul-primary);
+            padding: clamp(24px, 2.94vw, 56px) clamp(15px, 2.94vw, 56px);
+            border-radius: 0 clamp(12px, 0.84vw, 16px) clamp(12px, 0.84vw, 16px) 0;
+
+            @include md {
+                border-radius: 0 0 clamp(12px, 0.84vw, 16px) clamp(12px, 0.84vw, 16px);
+            }
+        }
+
+        &-title {
+            color: var(--white);
+            font-family: var(--font-lato);
+            font-weight: 700;
+            font-size: clamp(24px, 2.52vw, 48px);
+            line-height: 117%;
+            letter-spacing: 0.5px;
+            margin-bottom: clamp(19px, 2.05vw, 39px);
+        }
+
+        label {
+            font-family: var(--font-lato);
+            font-weight: 600;
+            font-size: clamp(15px, 0.95vw, 18px);
+            line-height: 144%;
+            letter-spacing: 0.5px;
+            color: var(--white);
+            margin-bottom: clamp(5px, 0.42vw, 8px);
+            display: block;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: clamp(10px, 0.84vw, 16px) clamp(12px, 1.05vw, 20px);
+            border: none;
+            background: var(--white);
+            border-radius: 4px;
+            outline: none;
+            font-size: clamp(13px, 0.84vw, 16px);
+        }
+
+        textarea {
+            height: clamp(121px, 6.52vw, 124px);
+        }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0px 1000px var(--white) inset !important;
+        }
+
+        .ul-btn {
+            width: 100%;
+            background-color: var(--ul-secondary);
+            color: var(--white);
+            justify-content: center;
+
+            &:hover {
+                background-color: var(--ul-c3);
+                color: var(--ul-primary);
+            }
+        }
+    }
+}

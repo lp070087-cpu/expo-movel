@@ -1,0 +1,165 @@
+.ul-why-choose-us {
+    background: linear-gradient(90deg, #041C33 0%, #213C84 100%);
+    counter-reset: section;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    &-imgs {
+        position: relative;
+        width: max-content;
+        max-width: 100%;
+        z-index: 1;
+
+        @include md {
+            margin: auto;
+        }
+
+        @include xs {
+            margin-left: 0;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: clamp(0px, 19.76vw, 376px);
+            aspect-ratio: 360/495.42;
+            border: 8px solid #DBE9A1;
+            border-radius: 16px;
+            left: clamp(122px, 7.99vw, 152px);
+            top: clamp(84px, 6.52vw, 124px);
+        }
+
+        &-vector {
+            position: absolute;
+            z-index: -1;
+            border-radius: 0 !important;
+            inset: calc(0% - clamp(18px, 1.47vw, 28px));
+            right: auto;
+            bottom: auto;
+        }
+
+        img {
+            border-radius: clamp(10px, 0.84vw, 16px);
+        }
+
+        .img-1 {
+            margin-bottom: clamp(33px, 3.47vw, 66px);
+            max-width: clamp(405px, 26.80vw, 510px);
+            aspect-ratio: 510/616;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .img-2 {
+            max-width: clamp(256px, 16.08vw, 306px);
+            aspect-ratio: 306/272;
+            object-fit: cover;
+        }
+    }
+
+    &-video-cover {
+        position: absolute;
+        bottom: calc(0% - clamp(33px, 3.47vw, 66px));
+        bottom: 0;
+        right: calc(0% - clamp(50px, 5.25vw, 100px));
+
+        @include xxs {
+            right: -10px;
+        }
+
+        a {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(46px, 2.94vw, 56px);
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            background-color: var(--ul-c3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background-color: var(--ul-primary);
+                color: var(--white);
+            }
+        }
+    }
+
+    &-descr {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: clamp(16px, 1.68vw, 32px);
+    }
+
+    &-point {
+        display: flex;
+        align-items: flex-start;
+        gap: clamp(10px, 0.84vw, 16px);
+        margin-bottom: clamp(14px, 1.16vw, 22px);
+
+        &::before {
+            counter-increment: section;
+            content: counter(section, decimal-leading-zero);
+            width: clamp(46px, 2.94vw, 56px);
+            aspect-ratio: 1/1;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--white);
+            color: var(--ul-secondary);
+            border: 4px solid var(--ul-gray);
+            border-radius: 28.5px;
+            font-size: clamp(17px, 1.05vw, 20px);
+            font-family: var(--font-lato);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        &-title {
+            font-family: var(--font-lato);
+            font-size: clamp(20px, 1.26vw, 24px);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: clamp(6px, 0.63vw, 12px);
+        }
+
+        &-descr {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: clamp(13px, 0.84vw, 16px);
+        }
+    }
+
+    .ul-btn {
+        display: inline-flex;
+        background: transparent;
+        border: 1px solid var(--ul-secondary);
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--ul-secondary);
+        }
+    }
+
+    &-vectors {
+        >* {
+            position: absolute;
+            z-index: -1;
+        }
+
+        .vector-1 {
+            bottom: 0;
+            left: 0;
+        }
+
+        .vector-2 {
+            right: 0;
+            bottom: 0;
+        }
+    }
+}

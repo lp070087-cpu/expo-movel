@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Medneeds</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/new/fav.png" />
+    <link rel="shortcut icon" type="image/png" href="assets/new/fav.png" />
+
+    <!-- libraries CSS -->
+    <link rel="stylesheet" href="assets/icon/flaticon_err.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/splide/splide.min.css" />
+    <link rel="stylesheet" href="assets/vendor/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/vendor/animate-wow/animate.min.css" />
+    <link rel="stylesheet" href="assets/vendor/slim-select/slimselect.css" />
+
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/custom-overrides.css" />
+  </head>
+
+  <body>
+    <div class="preloader" id="preloader">
+      <div class="loader"></div>
+    </div>
+
+    <!-- SIDEBAR SECTION START -->
+    <div class="ul-sidebar">
+      <!-- header -->
+      <div class="ul-sidebar-header">
+        <div class="ul-sidebar-header-logo">
+          <a href="index.html">
+            <img src="assets/new/logo2.png" alt="logo" class="logo" />
+          </a>
+        </div>
+        <!-- sidebar closer -->
+        <button class="ul-sidebar-closer">
+          <i class="flaticon-close"></i>
+        </button>
+      </div>
+
+      <div class="ul-sidebar-header-nav-wrapper d-block d-lg-none"></div>
+
+      <!-- sidebar content -->
+      <div>
+        <div class="ul-sidebar-txt-block">
+          <span class="title ul-sidebar-footer-title">Sobre Nós</span>
+          <p class="descr">
+            Medneeds - A plataforma que organiza sua rotina médica em segundos.
+            Publique, receba e gerencie plantões com inteligência, segurança e
+            autonomia.
+          </p>
+        </div>
+
+        <div class="ul-sidebar-txt-block">
+          <span class="title ul-sidebar-footer-title">Localização</span>
+          <p class="descr">
+            <i class="flaticon-pin"></i
+            ><span>Estação Medicina - São Luís, Maranhão, Brasil</span>
+          </p>
+        </div>
+
+        <div class="ul-sidebar-txt-block">
+          <span class="title ul-sidebar-footer-title">Contato</span>
+          <p class="descr">
+            <i class="flaticon-call"></i
+            ><a href="tel:+5598981659576">+55 98 98165-9576</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- sidebar footer -->
+      <div class="ul-sidebar-footer">
+        <span class="ul-sidebar-footer-title">Siga-nos</span>
+
+        <div class="ul-sidebar-footer-social">
+          <a href="#"><i class="flaticon-facebook"></i></a>
+          <a href="#"><i class="flaticon-twitter"></i></a>
+          <a href="#"><i class="flaticon-instagram"></i></a>
+          <a href="#"><i class="flaticon-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- SIDEBAR SECTION END -->
+
+    <!-- SEARCH MODAL SECTION START -->
+    <div class="ul-search-form-wrapper flex-grow-1 flex-shrink-0">
+      <button class="ul-search-closer"><i class="flaticon-close"></i></button>
+
+      <form action="#" class="ul-search-form">
+        <div class="ul-search-form-right">
+          <input
+            type="search"
+            name="search"
+            id="ul-search"
+            placeholder="Buscar Aqui"
+          />
+          <button type="submit">
+            <span class="icon"><i class="flaticon-search"></i></span>
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- SEARCH MODAL SECTION END -->
+
+    <!-- HEADER SECTION START -->
+    <header class="ul-header">
+      <div class="ul-header-top">
+        <div class="ul-header-container">
+          <div class="row align-items-center gy-2">
+            <div class="col-md-7 col-sm-5">
+              <div class="ul-header-top-infos">
+                <span class="ul-header-top-info" style="color: #0b193e">
+                  <i class="flaticon-call" style="color: #0b193e"></i>
+                  <span class="txt">
+                    <span class="title">Contato</span>
+                    <a
+                      href="tel:+5598981659576"
+                      class="value"
+                      style="color: #0b193e"
+                    >
+                      >+55 98 98165-9576</a
+                    >
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <!-- header top right -->
+            <div class="col-md-5 col-7 d-none d-sm-block">
+              <div
+                class="ul-header-top-infos justify-content-sm-end justify-content-center"
+              >
+                <span class="ul-header-top-info ul-header-top-email">
+                  <i class="flaticon-envelope" style="color: #caf55f"></i>
+                  <span class="txt">
+                    <span class="value"
+                      ><a href="mailto:contato@medneeds.com.br" class="value"
+                        >contato@medneeds.com.br</a
+                      ></span
+                    >
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ul-header-bottom ul-header-container to-be-sticky">
+        <div class="ul-header-bottom-content">
+          <div class="ul-header-bottom-left">
+            <div class="logo-container">
+              <a href="index.html" class="d-inline-block"
+                ><img src="assets/new/logo2.png" alt="logo" class="logo"
+              /></a>
+            </div>
+          </div>
+
+          <div class="ul-header-bottom-right">
+            <a
+              href="index.html"
+              class="ul-btn d-sm-inline-flex d-none custom-download-btn"
+              style="background: #caf55f; border-color: #caf55f; color: #0b193e"
+              >VOLTAR AO INÍCIO <i class="flaticon-top-right"></i
+            ></a>
+            <style>
+              .custom-download-btn:hover {
+                background: #0b193e !important;
+                color: #caf55f !important;
+                border-color: #0b193e !important;
+              }
+              .custom-download-btn:hover i {
+                color: #caf55f !important;
+              }
+              .custom-download-btn i {
+                color: #0b193e;
+                transition: color 0.2s;
+              }
+            </style>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- HEADER SECTION END -->
+
+    <main>
+      <!-- HERO/INTRO SECTION START -->
+      <section class="login-hero">
+        <div class="ul-container">
+          <div class="login-hero-inner">
+            <h1>Entrar no Medneeds</h1>
+            <p>Organize sua rotina médica com segurança e praticidade.</p>
+          </div>
+        </div>
+      </section>
+      <!-- HERO/INTRO SECTION END -->
+
+      <!-- LOGIN SECTION START -->
+      <section class="ul-section-spacing">
+        <div class="ul-container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+              <div class="login-card">
+                <form action="#" method="post" novalidate>
+                  <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="seuemail@exemplo.com"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="********"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-row">
+                    <label class="checkbox">
+                      <input type="checkbox" id="remember" />
+                      <span>Lembrar-me</span>
+                    </label>
+                    <a href="#" class="link">Esqueci minha senha</a>
+                  </div>
+
+                  <button type="submit" class="ul-btn submit-btn">
+                    ENTRAR <i class="flaticon-top-right"></i>
+                  </button>
+
+                  <p class="signup-text">
+                    Ainda não tem conta?
+                    <a href="#" class="link">Crie uma conta</a>
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- LOGIN SECTION END -->
+    </main>
+
+    <!-- FOOTER SECTION START -->
+    <footer class="ul-footer">
+      <div class="ul-container">
+        <!-- footer top -->
+        <div class="ul-footer-top ul-section-spacing">
+          <div class="ul-footer-top-wrapper wow animate__fadeInUp">
+            <div class="ul-footer-about">
+              <a href="index.html" class="logo-wrapper"
+                ><img src="assets/new/newLogo.png" alt="logo"
+              /></a>
+              <p class="ul-footer-about-txt">
+                Medneeds - A plataforma que organiza sua rotina médica em
+                segundos. Publique, receba e gerencie plantões com inteligência,
+                segurança e autonomia.
+              </p>
+
+              <div class="ul-footer-socials">
+                <a href="#"><i class="flaticon-facebook"></i></a>
+                <a href="#"><i class="flaticon-twitter"></i></a>
+                <a href="#"><i class="flaticon-youtube"></i></a>
+                <a href="#"><i class="flaticon-instagram"></i></a>
+              </div>
+            </div>
+
+            <div class="ul-footer-widget">
+              <h3 class="ul-footer-widget-title">Funcionalidades</h3>
+
+              <div class="ul-footer-widget-links">
+                <a href="index.html#feed">Feed de Plantões</a>
+                <a href="index.html#agendamento">Agendamento Inteligente</a>
+                <a href="index.html#financeiro">Resumo Financeiro</a>
+                <a href="index.html#publicacao">Publicação Rápida</a>
+              </div>
+            </div>
+
+            <div class="ul-footer-widget">
+              <h3 class="ul-footer-widget-title">Planos</h3>
+
+              <div class="ul-footer-widget-links">
+                <a href="index.html#planos">Plano Essencial - Grátis</a>
+                <a href="index.html#planos">Plano Premium</a>
+                <a href="index.html#planos">Plano Power Médico</a>
+                <a href="index.html#download">Baixar Agora</a>
+              </div>
+            </div>
+
+            <div class="ul-footer-widget ul-footer-contact-widget">
+              <h3 class="ul-footer-widget-title">Contato</h3>
+
+              <div class="ul-footer-widget-links">
+                <p class="ul-footer-widget-address mb-0">
+                  Estação Medicina - São Luís, Maranhão, Brasil
+                </p>
+                <div class="ul-footer-contact-info">
+                  <span class="ul-footer-contact-info-label">Email</span>
+                  <span class="ul-footer-contact-info-address"
+                    ><a href="mailto:contato@medneeds.com.br"
+                      >contato@medneeds.com.br</a
+                    ></span
+                  >
+                </div>
+                <div class="ul-footer-contact-info">
+                  <span class="ul-footer-contact-info-label">WhatsApp</span>
+                  <span class="ul-footer-contact-info-address"
+                    ><a href="tel:+5598981659576">+55 98 98165-9576</a></span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- footer bottom -->
+        <div class="ul-footer-bottom">
+          <div
+            class="row row-cols-xl-3 row-cols-md-2 row-cols-1 align-items-center gy-4"
+          >
+            <div class="col">
+              <p class="copyright-txt">
+                &copy; <span class="colored">Medneeds</span>
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                . Todos os direitos reservados.
+              </p>
+            </div>
+
+            <!-- links -->
+            <div class="col-xl col-12">
+              <div class="ul-footer-bottom-links">
+                <a href="privacy-policy.html">Política de Privacidade</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- FOOTER SECTION END -->
+
+    <!-- libraries JS -->
+    <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/splide/splide.min.js"></script>
+    <script src="assets/vendor/splide/splide-extension-auto-scroll.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/animate-wow/wow.min.js"></script>
+    <script src="assets/vendor/fslightbox/fslightbox.js"></script>
+    <script src="assets/vendor/slim-select/slimselect.min.js"></script>
+
+    <!-- custom JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/tab.js"></script>
+    <script src="assets/js/accordion.js"></script>
+    <script src="assets/js/progressbar.js"></script>
+
+    <style>
+      .login-hero {
+        background: linear-gradient(135deg, #0b193e 0%, #1a2749 100%);
+        padding: 80px 0 60px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .login-hero::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        right: -100px;
+        width: 400px;
+        height: 400px;
+        background: #caf55f;
+        border-radius: 50%;
+        opacity: 0.1;
+        filter: blur(60px);
+      }
+
+      .login-hero-inner {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+      }
+
+      .login-hero-inner h1 {
+        font-size: 42px;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 10px;
+      }
+
+      .login-hero-inner p {
+        color: rgba(255, 255, 255, 0.8);
+        margin: 0;
+      }
+
+      .login-card {
+        background: #ffffff;
+        padding: 40px 35px;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(11, 25, 62, 0.1);
+        border: 2px solid rgba(202, 245, 95, 0.25);
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        color: #0b193e;
+        margin-bottom: 8px;
+      }
+
+      .form-group input[type="email"],
+      .form-group input[type="password"] {
+        width: 100%;
+        height: 48px;
+        border-radius: 10px;
+        border: 1.5px solid #e2e8f0;
+        padding: 0 14px;
+        outline: none;
+        transition: all 0.2s ease;
+        background: #fff;
+      }
+
+      .form-group input:focus {
+        border-color: #caf55f;
+        box-shadow: 0 0 0 4px rgba(202, 245, 95, 0.2);
+      }
+
+      .form-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 6px 0 16px;
+      }
+
+      .checkbox {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        user-select: none;
+        color: #0b193e;
+      }
+
+      .checkbox input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: #0b193e;
+      }
+
+      .link {
+        color: #0b193e;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .link:hover {
+        text-decoration: underline;
+      }
+
+      .submit-btn {
+        background: #caf55f;
+        border-color: #caf55f;
+        color: #0b193e;
+        width: 100%;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .submit-btn:hover {
+        background: #0b193e !important;
+        color: #caf55f !important;
+        border-color: #0b193e !important;
+      }
+
+      .signup-text {
+        text-align: center;
+        margin: 14px 0 0;
+        color: #53627c;
+      }
+
+      @media (max-width: 768px) {
+        .login-hero-inner h1 {
+          font-size: 32px;
+        }
+        .login-card {
+          padding: 28px 22px;
+        }
+      }
+    </style>
+  </body>
+</html>

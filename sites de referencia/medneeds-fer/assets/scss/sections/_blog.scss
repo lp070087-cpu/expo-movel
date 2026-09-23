@@ -1,0 +1,187 @@
+.ul-blogs {
+    position: relative;
+    z-index: 1;
+
+    &-vector {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        max-width: clamp(308px, 33.53vw, 638px);
+        pointer-events: none;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        background: url(../img/blog-bg.png) no-repeat center center/cover;
+        inset: 0;
+        z-index: -1;
+        opacity: 8%;
+    }
+}
+
+.ul-blog {
+    background-color: var(--ul-gray);
+    border-radius: 16px;
+    overflow: hidden;
+
+    &-img img {
+        width: 100%;
+        aspect-ratio: 419/300;
+        object-fit: cover;
+    }
+
+    &-title {
+        font-size: clamp(18px, 1.26vw, 24px);
+        font-weight: 700;
+        font-family: var(--font-lato);
+        color: var(--ul-primary);
+        letter-spacing: 0.5px;
+        line-height: 1.35;
+        margin-bottom: clamp(5px, 0.42vw, 8px);
+
+        &:hover {
+            color: var(--ul-secondary);
+        }
+    }
+
+    &-txt {
+        padding: clamp(16px, 1.26vw, 24px);
+    }
+
+    &-infos {
+        display: flex;
+        gap: clamp(20px, 2.10vw, 40px);
+        font-size: clamp(13px, 0.94vw, 16px);
+        color: var(--ul-gray2);
+
+        i {
+            color: #B6B7B9;
+        }
+    }
+
+    &-info {
+        display: flex;
+        gap: clamp(7px, 0.53vw, 10px);
+        align-items: center;
+
+        span {
+            display: inline-flex;
+        }
+    }
+
+    &-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(8px, 0.68vw, 13px);
+        background-color: var(--ul-primary);
+        color: var(--white);
+        font-size: clamp(13px, 0.94vw, 16px);
+        font-weight: 500;
+        padding: clamp(8px, 0.63vw, 12px);
+        text-transform: uppercase;
+
+        &:hover {
+            background-color: var(--ul-secondary);
+            color: var(--white);
+        }
+    }
+}
+
+
+// INDEX-2 BLOG STYLES 
+.ul-2-blogs {
+    position: relative;
+    z-index: 1;
+
+    &-vectors {
+        >* {
+            position: absolute;
+            z-index: -1;
+        }
+
+        .vector-1 {
+            right: 0;
+            top: calc(0% - clamp(14px, 1.16vw, 22px));
+        }
+    }
+}
+
+.ul-2-blog {
+    background-color: var(--ul-gray);
+    padding: clamp(13px, 0.84vw, 16px);
+    border-radius: clamp(10px, 0.84vw, 16px);
+    transition: 0.3s ease;
+    border: 2px solid var(--ul-gray);
+
+    &:hover {
+        background-color: var(--white);
+        border: 2px solid var(--ul-secondary);
+    }
+
+    &-img {
+        border-radius: clamp(10px, 0.84vw, 16px);
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+
+        img {
+            width: 100%;
+            aspect-ratio: 612/350;
+            object-fit: cover
+        }
+    }
+
+    &-category {
+        position: absolute;
+        top: clamp(15px, 1.26vw, 24px);
+        left: clamp(15px, 1.26vw, 24px);
+        background-color: var(--ul-c3);
+        color: var(--ul-primary);
+        border-radius: 999px;
+        font-size: clamp(13px, 0.94vw, 16px);
+        font-weight: 400;
+        padding: clamp(3.5px, 0.26vw, 5px) clamp(10px, 0.95vw, 18px);
+        z-index: 2;
+    }
+
+    &-txt {
+        padding: clamp(15px, 1.26vw, 24px) clamp(5px, 0.42vw, 8px);
+    }
+
+    &-infos {
+        display: inline-flex;
+        gap: clamp(20px, 2.10vw, 40px);
+        font-size: clamp(13px, 0.94vw, 16px);
+        color: var(--ul-gray2);
+        margin-bottom: clamp(8px, 0.63vw, 12px);
+    }
+
+    &-title {
+        font-size: clamp(20px, 1.26vw, 24px);
+        font-family: var(--font-lato);
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        margin-bottom: clamp(15px, 1.26vw, 24px);
+
+        a {
+            color: var(--ul-primary);
+
+            &:hover {
+                color: var(--ul-secondary);
+            }
+        }
+    }
+
+    &-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: clamp(7px, 0.53vw, 10px);
+
+        &:hover {
+            color: var(--ul-secondary);
+        }
+    }
+}

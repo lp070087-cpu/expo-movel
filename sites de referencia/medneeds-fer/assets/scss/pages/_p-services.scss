@@ -1,0 +1,88 @@
+.ul-inner-services {
+    background-color: var(--white);
+}
+
+.ul-inner-service {
+    background-color: var(--ul-gray);
+
+    .ul-service-icon {
+        background-color: var(--white);
+    }
+
+    &:hover {
+        background-color: var(--white);
+    }
+}
+
+// SERVICES INNER PAGE 
+.ul-inner-service-2 {
+    background-color: var(--ul-gray);
+    border-radius: clamp(12px, 0.84vw, 16px);
+    overflow: hidden;
+
+    &:hover {
+        .ul-btn {
+            grid-template-columns: 1fr max-content;
+            gap: clamp(7px, 0.53vw, 10px);
+        }
+    }
+
+    &-img {
+        position: relative;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            aspect-ratio: 419/256;
+        }
+    }
+
+    &-btn-wrapper {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        inset: auto clamp(16px, 1.68vw, 32px);
+        bottom: 0;
+        transform: translateY(50%);
+    }
+
+    .ul-service-icon {
+        background-color: var(--white);
+        width: clamp(46px, 2.94vw, 56px);
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+        margin-bottom: 0;
+
+        svg {
+            width: clamp(20px, 1.26vw, 24px);
+        }
+    }
+
+    &-btn {
+        display: grid;
+        align-content: center;
+        grid-template-columns: 0fr max-content;
+        gap: 0;
+        padding: clamp(9px, 0.63vw, 12px) clamp(12.5px, 0.81vw, 15.5px);
+        background-color: var(--ul-secondary);
+        color: var(--white);
+
+        span {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    }
+
+    &-txt {
+        padding: clamp(31px, 3.26vw, 62px) clamp(16px, 1.68vw, 32px) clamp(16px, 1.68vw, 32px);
+
+        .ul-service-title {
+            margin-bottom: clamp(10px, 0.84vw, 16px);
+        }
+
+        .ul-service-descr {
+            margin-bottom: 0;
+        }
+    }
+}

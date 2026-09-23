@@ -1,0 +1,42 @@
+.ul-404 {
+    text-align: center;
+
+    &-img {
+        margin-bottom: clamp(26px, 2.73vw, 52px);
+
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    &-title {
+        font-family: var(--font-lato);
+        font-weight: 800;
+        font-size: clamp(28px, 3.78vw, 72px);
+        line-height: 111%;
+        text-align: center;
+        letter-spacing: 0.005em;
+        color: var(--ul-primary);
+    }
+
+    &-descr {
+        font-weight: 400;
+        font-size: clamp(13px, 0.84vw, 16px);
+        line-height: 150%;
+        text-align: center;
+        color: var(--ul-gray2);
+        margin-bottom: clamp(24px, 2.52vw, 48px);
+    }
+
+    .ul-btn {
+        display: inline-flex;
+        background-color: var(--ul-secondary);
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--ul-c3);
+            color: var(--ul-primary);
+        }
+    }
+}

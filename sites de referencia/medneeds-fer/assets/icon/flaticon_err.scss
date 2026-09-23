@@ -1,0 +1,133 @@
+$flaticon_err-font: "flaticon_err";
+
+@font-face {
+    font-family: $flaticon_err-font;
+    src: url("./flaticon_err.woff2?543972b2c7b775fae29c1447b73dfcff") format("woff2"),
+url("./flaticon_err.woff?543972b2c7b775fae29c1447b73dfcff") format("woff"),
+url("./flaticon_err.eot?543972b2c7b775fae29c1447b73dfcff#iefix") format("embedded-opentype"),
+url("./flaticon_err.ttf?543972b2c7b775fae29c1447b73dfcff") format("truetype"),
+url("./flaticon_err.svg?543972b2c7b775fae29c1447b73dfcff#flaticon_err") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_err !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon_err-map: (
+    "youtube": "\f101",
+    "quotation": "\f102",
+    "twitter": "\f103",
+    "menu": "\f104",
+    "instagram": "\f105",
+    "facebook": "\f106",
+    "arrow-up-right": "\f107",
+    "call": "\f108",
+    "envelope": "\f109",
+    "search": "\f10a",
+    "right-arrow": "\f10b",
+    "close": "\f10c",
+    "play-button": "\f10d",
+    "video-call": "\f10e",
+    "calendar": "\f10f",
+    "check": "\f110",
+    "medical-check-up": "\f111",
+    "meditation": "\f112",
+    "multi-agent-system": "\f113",
+    "biochemistry": "\f114",
+    "microscope": "\f115",
+    "test-tube": "\f116",
+    "pin": "\f117",
+    "pin-1": "\f118",
+    "first-aid-kit": "\f119",
+    "clock": "\f11a",
+    "down-arrow": "\f11b",
+);
+
+.flaticon-youtube:before {
+    content: map-get($flaticon_err-map, "youtube");
+}
+.flaticon-quotation:before {
+    content: map-get($flaticon_err-map, "quotation");
+}
+.flaticon-twitter:before {
+    content: map-get($flaticon_err-map, "twitter");
+}
+.flaticon-menu:before {
+    content: map-get($flaticon_err-map, "menu");
+}
+.flaticon-instagram:before {
+    content: map-get($flaticon_err-map, "instagram");
+}
+.flaticon-facebook:before {
+    content: map-get($flaticon_err-map, "facebook");
+}
+.flaticon-arrow-up-right:before {
+    content: map-get($flaticon_err-map, "arrow-up-right");
+}
+.flaticon-call:before {
+    content: map-get($flaticon_err-map, "call");
+}
+.flaticon-envelope:before {
+    content: map-get($flaticon_err-map, "envelope");
+}
+.flaticon-search:before {
+    content: map-get($flaticon_err-map, "search");
+}
+.flaticon-right-arrow:before {
+    content: map-get($flaticon_err-map, "right-arrow");
+}
+.flaticon-close:before {
+    content: map-get($flaticon_err-map, "close");
+}
+.flaticon-play-button:before {
+    content: map-get($flaticon_err-map, "play-button");
+}
+.flaticon-video-call:before {
+    content: map-get($flaticon_err-map, "video-call");
+}
+.flaticon-calendar:before {
+    content: map-get($flaticon_err-map, "calendar");
+}
+.flaticon-check:before {
+    content: map-get($flaticon_err-map, "check");
+}
+.flaticon-medical-check-up:before {
+    content: map-get($flaticon_err-map, "medical-check-up");
+}
+.flaticon-meditation:before {
+    content: map-get($flaticon_err-map, "meditation");
+}
+.flaticon-multi-agent-system:before {
+    content: map-get($flaticon_err-map, "multi-agent-system");
+}
+.flaticon-biochemistry:before {
+    content: map-get($flaticon_err-map, "biochemistry");
+}
+.flaticon-microscope:before {
+    content: map-get($flaticon_err-map, "microscope");
+}
+.flaticon-test-tube:before {
+    content: map-get($flaticon_err-map, "test-tube");
+}
+.flaticon-pin:before {
+    content: map-get($flaticon_err-map, "pin");
+}
+.flaticon-pin-1:before {
+    content: map-get($flaticon_err-map, "pin-1");
+}
+.flaticon-first-aid-kit:before {
+    content: map-get($flaticon_err-map, "first-aid-kit");
+}
+.flaticon-clock:before {
+    content: map-get($flaticon_err-map, "clock");
+}
+.flaticon-down-arrow:before {
+    content: map-get($flaticon_err-map, "down-arrow");
+}

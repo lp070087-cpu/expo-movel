@@ -1,0 +1,215 @@
+.ul-cta {
+    background: var(--ul-primary);
+    position: relative;
+    z-index: 1;
+    padding: clamp(50px, 5.25vw, 100px) 0;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url(../img/cta-bg.jpg) no-repeat center center/cover;
+        z-index: -2;
+        opacity: 6%;
+    }
+
+    .ul-section-heading {
+        margin-bottom: 0;
+    }
+
+    .ul-section-sub-title {
+        color: var(--ul-c3);
+        border-color: var(--ul-c3);
+
+        &::before {
+            background-color: var(--ul-c3);
+        }
+    }
+
+    .ul-section-title {
+        color: var(--white);
+        margin-bottom: 0;
+    }
+
+    &-btn {
+        background-color: var(--ul-secondary);
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--ul-c3);
+            color: var(--ul-primary);
+        }
+    }
+}
+
+// INDEX-2 CTA STYLE
+.ul-2-cta-card {
+    padding: clamp(24px, 2.52vw, 48px) clamp(20px, 2.10vw, 40px);
+    border-radius: 16px;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+
+    // card 01
+    &-1 {
+        background-color: var(--ul-c3);
+    }
+
+    &-title {
+        color: var(--ul-primary);
+        font-family: var(--font-lato);
+        font-weight: 800;
+        font-size: clamp(20px, 1.26vw, 24px);
+        display: block;
+        line-height: 133%;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid rgba(206, 207, 208, 0.4);
+        padding-bottom: clamp(14px, 1.26vw, 24px);
+        margin-bottom: clamp(16px, 1.68vw, 32px);
+    }
+
+    &-descr {
+        font-weight: 400;
+        font-size: clamp(13px, 0.84vw, 16px);
+        line-height: 150%;
+        color: var(--ul-gray2);
+        opacity: 0.7;
+    }
+
+    &-contact {
+        display: flex;
+        align-items: center;
+        gap: clamp(9px, 0.63vw, 12px);
+        margin-bottom: clamp(24px, 2.52vw, 48px);
+
+        &-icon {
+            width: clamp(46px, 2.94vw, 56px);
+            aspect-ratio: 1/1;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(25px, 1.47vw, 28px);
+        }
+
+        &-info {
+            .title {
+                display: block;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 143%;
+                color: var(--ul-gray2);
+                opacity: 0.8;
+                margin-bottom: clamp(5px, 0.42vw, 8px);
+            }
+
+            .number {
+
+                font-family: var(--font-lato);
+                font-weight: 600;
+                font-size: clamp(17px, 1.05vw, 20px);
+                line-height: 140%;
+                color: var(--ul-primary);
+
+                &:hover {
+                    color: var(--ul-secondary);
+                }
+            }
+        }
+    }
+
+    .ul-btn {
+        display: inline-flex;
+        background-color: var(--ul-secondary);
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--ul-primary);
+            color: var(--white);
+        }
+    }
+
+    &-vector {
+        position: absolute;
+        right: clamp(12px, 1.16vw, 22px);
+        bottom: 0;
+        z-index: -1;
+    }
+
+    // card 02
+    &-2 {
+        background: linear-gradient(90deg, #041C33 0%, #213C84 100%);
+    }
+
+    &-hours {
+        font-weight: 400;
+        font-size: clamp(13px, 0.84vw, 16px);
+        line-height: 150%;
+        color: var(--white);
+
+    }
+
+    &-hour {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: clamp(12px, 1.05vw, 20px) 0 clamp(7px, 0.63vw, 12px);
+        border: solid rgba(206, 207, 208, 0.08);
+        border-width: 1px 0;
+
+        &:first-child {
+            padding-top: 0;
+            border-top: none;
+        }
+    }
+
+    // card 03
+    &-3 {
+        background-color: var(--ul-primary);
+
+        .ul-2-cta-card-vector {
+            right: 0;
+        }
+    }
+
+    &-doctors {
+        margin-bottom: clamp(16px, 1.68vw, 32px);
+
+        &-img {
+            display: flex;
+            margin-bottom: clamp(14px, 1.26vw, 24px);
+
+            img {
+                border: 2px solid var(--white);
+                width: clamp(50px, 2.94vw, 56px);
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+
+                &:not(:first-child) {
+                    margin-left: -25px;
+                }
+            }
+        }
+
+        .sub-title {
+            font-weight: 400;
+            font-size: clamp(13px, 0.84vw, 16px);
+            line-height: 150%;
+            color: var(--white);
+            opacity: 0.8;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .title {
+            font-family: var(--font-lato);
+            font-weight: 800;
+            font-size: clamp(24px, 1.68vw, 32px);
+            line-height: 125%;
+            letter-spacing: 0.5px;
+            color: var(--white);
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,122 @@
+@font-face {
+  font-family: "flaticon_err";
+  src: url("./flaticon_err.woff2?543972b2c7b775fae29c1447b73dfcff") format("woff2"), url("./flaticon_err.woff?543972b2c7b775fae29c1447b73dfcff") format("woff"), url("./flaticon_err.eot?543972b2c7b775fae29c1447b73dfcff#iefix") format("embedded-opentype"), url("./flaticon_err.ttf?543972b2c7b775fae29c1447b73dfcff") format("truetype"), url("./flaticon_err.svg?543972b2c7b775fae29c1447b73dfcff#flaticon_err") format("svg");
+}
+i[class^=flaticon-]:before, i[class*=" flaticon-"]:before {
+  font-family: flaticon_err !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-youtube:before {
+  content: "\f101";
+}
+
+.flaticon-quotation:before {
+  content: "\f102";
+}
+
+.flaticon-twitter:before {
+  content: "\f103";
+}
+
+.flaticon-menu:before {
+  content: "\f104";
+}
+
+.flaticon-instagram:before {
+  content: "\f105";
+}
+
+.flaticon-facebook:before {
+  content: "\f106";
+}
+
+.flaticon-arrow-up-right:before {
+  content: "\f107";
+}
+
+.flaticon-call:before {
+  content: "\f108";
+}
+
+.flaticon-envelope:before {
+  content: "\f109";
+}
+
+.flaticon-search:before {
+  content: "\f10a";
+}
+
+.flaticon-right-arrow:before {
+  content: "\f10b";
+}
+
+.flaticon-close:before {
+  content: "\f10c";
+}
+
+.flaticon-play-button:before {
+  content: "\f10d";
+}
+
+.flaticon-video-call:before {
+  content: "\f10e";
+}
+
+.flaticon-calendar:before {
+  content: "\f10f";
+}
+
+.flaticon-check:before {
+  content: "\f110";
+}
+
+.flaticon-medical-check-up:before {
+  content: "\f111";
+}
+
+.flaticon-meditation:before {
+  content: "\f112";
+}
+
+.flaticon-multi-agent-system:before {
+  content: "\f113";
+}
+
+.flaticon-biochemistry:before {
+  content: "\f114";
+}
+
+.flaticon-microscope:before {
+  content: "\f115";
+}
+
+.flaticon-test-tube:before {
+  content: "\f116";
+}
+
+.flaticon-pin:before {
+  content: "\f117";
+}
+
+.flaticon-pin-1:before {
+  content: "\f118";
+}
+
+.flaticon-first-aid-kit:before {
+  content: "\f119";
+}
+
+.flaticon-clock:before {
+  content: "\f11a";
+}
+
+.flaticon-down-arrow:before {
+  content: "\f11b";
+}/*# sourceMappingURL=flaticon_err.css.map */

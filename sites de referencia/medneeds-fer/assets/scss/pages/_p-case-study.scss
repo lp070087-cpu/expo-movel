@@ -1,0 +1,341 @@
+// case study page styles
+.ul-case-studies {
+    --card-gap: clamp(16px, 1.68vw, 32px);
+
+    .row {
+        --bs-gutter-x: var(--card-gap);
+        --bs-gutter-y: var(--card-gap);
+    }
+}
+
+.ul-case-study {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 1;
+    margin-bottom: var(--card-gap);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &:hover {
+        .ul-case-study-img img {
+            transform: scale(1.1);
+        }
+
+        .ul-case-study-txt {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    &-img {
+        img {
+            width: 100%;
+        }
+    }
+
+    &-txt {
+        background-color: var(--white);
+        position: absolute;
+        bottom: clamp(16px, 1.68vw, 32px);
+        left: clamp(16px, 1.68vw, 32px);
+        display: flex;
+        border-radius: clamp(5px, 0.42vw, 8px);
+        transform: translateY(30%);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    &-order {
+        font-family: var(--font-lato);
+        font-weight: 600;
+        font-size: clamp(17px, 1.05vw, 20px);
+        line-height: 140%;
+        color: var(--ul-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid rgba(206, 207, 208, 0.24);
+        padding: clamp(14px, 1.05vw, 20px);
+    }
+
+    &-infos {
+        padding: clamp(4px, 0.42vw, 8px) clamp(8px, 0.84vw, 16px);
+        padding-right: clamp(16px, 1.68vw, 32px);
+    }
+
+    &-title {
+        font-family: var(--font-lato);
+        font-weight: 600;
+        font-size: clamp(17px, 1.05vw, 20px);
+        line-height: 140%;
+        margin-bottom: 4px;
+        display: block;
+
+        a {
+            color: var(--ul-primary);
+
+            &:hover {
+                color: var(--ul-secondary);
+            }
+        }
+    }
+
+    &-sub-title {
+        font-weight: 400;
+        font-size: clamp(13px, 0.84vw, 16px);
+        line-height: 150%;
+        color: var(--ul-gray2);
+    }
+}
+
+
+
+// case study details page styles
+.ul-case-study-details {
+    &-heading {
+        display: flex;
+        align-items: center;
+        gap: clamp(20px, 2.10vw, 40px);
+        padding: 0 clamp(15px, 5.94vw, 113px) clamp(28px, 2.94vw, 56px);
+        border-bottom: 1px solid rgba(206, 207, 208, 0.24);
+
+        @include md {
+            padding: 0 0px clamp(28px, 2.94vw, 56px);
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &-img {
+            flex-shrink: 0;
+            border-radius: 10px;
+            overflow: hidden;
+
+            @include md {
+                width: 100%;
+            }
+
+            img {
+                width: clamp(402px, 27.96vw, 532px);
+                aspect-ratio: 532 / 364;
+                object-fit: cover;
+                max-width: 100%;
+
+                @include md {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &-info {
+        display: flex;
+        align-items: center;
+        gap: clamp(8px, 0.58vw, 11px);
+        font-weight: 400;
+        font-size: clamp(13px, 0.84vw, 16px);
+        line-height: 150%;
+        color: var(--ul-gray2);
+        margin-bottom: clamp(6px, 0.53vw, 10px);
+
+
+        i {
+            color: var(--ul-secondary);
+            font-size: clamp(15px, 0.95vw, 18px);
+        }
+    }
+
+    &-title {
+        font-family: var(--font-lato);
+        font-weight: 800;
+        font-size: clamp(24px, 2.10vw, 40px);
+        line-height: 120%;
+        letter-spacing: 0.5px;
+        color: var(--ul-primary);
+        margin-bottom: clamp(7px, 0.63vw, 12px);
+    }
+
+    &-descr {
+        font-weight: 400;
+        font-size: clamp(13px, 0.84vw, 16px);
+        line-height: 150%;
+        color: var(--ul-gray2);
+        margin-bottom: clamp(16px, 1.68vw, 32px);
+    }
+
+    &-share {
+        display: flex;
+        align-items: center;
+        gap: clamp(8px, 0.84vw, 16px);
+
+        .title {
+            font-family: var(--font-lato);
+            font-weight: 600;
+            font-size: clamp(13px, 0.84vw, 16px);
+            line-height: 150%;
+            letter-spacing: 0.5px;
+            color: var(--ul-primary);
+        }
+
+        &-links {
+            display: flex;
+            gap: clamp(9px, 0.95vw, 18px);
+
+            a {
+                color: var(--ul-gray2);
+
+                &:hover {
+                    color: var(--ul-secondary);
+                }
+            }
+        }
+    }
+
+    &-txt {
+        max-width: none;
+
+        &-block {
+            display: flex;
+            align-items: center;
+
+            @include md {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            &-video-cover {
+                position: relative;
+                max-width: clamp(273px, 16.97vw, 323px);
+                z-index: 1;
+                flex-shrink: 0;
+
+                @include md {
+                    width: 100%;
+                    max-width: 100%;
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background-color: rgba(4, 28, 51, 0.72);
+                    border-radius: 12px;
+                }
+
+                img {
+                    width: 100%;
+                    aspect-ratio: 323/344;
+                    object-fit: cover;
+                    border-radius: 12px;
+                }
+
+                a {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: var(--ul-secondary);
+                    color: var(--white);
+                    width: clamp(53px, 2.94vw, 56px);
+                    aspect-ratio: 1/1;
+                    border-radius: 50%;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &:hover {
+                        background-color: var(--ul-c3);
+                        color: var(--ul-primary);
+                    }
+                }
+            }
+
+            &-2 {
+                display: grid;
+                grid-template-columns: repeat(2, auto);
+                gap: 20px;
+
+                @include md {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            &-img {
+                grid-column: span 2;
+
+                @include md {
+                    grid-column: span 1;
+                }
+
+            }
+        }
+
+        iframe {
+            width: 100%;
+            aspect-ratio: 852/372;
+        }
+    }
+
+    &-sidebar {
+        padding-top: clamp(16px, 1.68vw, 32px);
+
+        &-info {
+            display: flex;
+            font-weight: 400;
+            border-bottom: 1px solid rgb(191, 191, 191, 0.32);
+            padding-bottom: clamp(8px, 0.84vw, 16px);
+            margin-bottom: clamp(8px, 0.84vw, 16px);
+            font-size: clamp(13px, 0.84vw, 16px);
+            line-height: 150%;
+            color: var(--ul-gray2);
+
+            &:last-child {
+                border: none;
+                padding-bottom: 0;
+                margin-bottom: 0;
+            }
+
+            .key {
+                min-width: clamp(117px, 6.31vw, 120px);
+            }
+
+            .value {
+                font-family: var(--font-lato);
+                font-weight: 600;
+                font-size: clamp(13px, 0.84vw, 16px);
+                line-height: 150%;
+                text-align: right;
+                letter-spacing: 0.5px;
+                color: var(--ul-primary);
+                flex-grow: 1;
+
+                a:hover {
+                    color: var(--ul-secondary);
+                }
+            }
+        }
+
+        &-socials {
+            display: flex;
+            gap: clamp(7px, 0.63vw, 12px);
+            flex-wrap: wrap;
+
+            a {
+                width: clamp(43px, 2.52vw, 48px);
+                aspect-ratio: 1/1;
+                background-color: var(--white);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+
+                &:hover {
+                    background-color: var(--ul-secondary);
+                    color: var(--white);
+                }
+            }
+        }
+    }
+}

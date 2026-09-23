@@ -1,0 +1,96 @@
+.servicesSection {
+  padding: 4rem 5rem;
+  background-color: #001f3f;
+  color: #ffffff;
+  margin: 0 auto;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  @media screen and (max-width: 768px) {
+    padding: 4rem 2rem;
+  }
+
+  .container {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .title {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    justify-content: flex-start;
+    border-left: 2px solid #ffffff;
+
+    h2 {
+      font-size: 1.8rem;
+      padding-left: 1vw;
+      color: #ffffff;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .card {
+    background-color: #214467;
+    padding: 2rem;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 1.5rem;
+      filter: brightness(0) invert(1);
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #c5d0de;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      width: 60%;
+    }
+
+    h5 {
+      font-size: 0.9rem;
+      color: #c5d0de;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      width: 80%;
+    }
+
+    .button {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #ffffff;
+      background-color: #66788b;
+      border: none;
+      border-radius: 300px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #688299;
+      }
+    }
+  }
+}

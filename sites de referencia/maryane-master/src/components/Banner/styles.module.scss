@@ -1,0 +1,28 @@
+.banner {
+  position: relative;
+  width: 100%;
+  height: 960px;
+  overflow: hidden;
+
+  .imageContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    img {
+      width: 10%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 768px) {
+    height: 430px;
+    .imageContent {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

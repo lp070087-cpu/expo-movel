@@ -1,0 +1,35 @@
+.ul-inner-appointment {
+    &-container {
+        background-color: var(--ul-gray);
+        max-width: clamp(800px, 57.49vw, 1094px);
+        margin: auto;
+        padding: clamp(30px, 2.52vw, 48px) clamp(15px, 2.52vw, 48px);
+        border-radius: 16px;
+
+        @include md {
+            margin: 0 15px;
+        }
+    }
+
+    &-title {
+        font-family: var(--font-lato);
+        font-weight: 800;
+        font-size: clamp(24px, 1.68vw, 32px);
+        line-height: 125%;
+        text-align: center;
+        letter-spacing: 0.5px;
+        color: #1C1C1C;
+        margin-bottom: clamp(32px, 3.36vw, 64px);
+    }
+
+    label {
+        font-family: var(--font-lato);
+        font-style: normal;
+        font-weight: 600;
+        font-size: clamp(15px, 0.95vw, 18px);
+        line-height: 144%;
+        letter-spacing: 0.5px;
+        color: var(--ul-primary);
+        margin-bottom: clamp(5px, 0.42vw, 8px);
+    }
+}
