@@ -375,6 +375,13 @@
         <div class="journey__coords"></div>
       </div>
 
+      <!-- Camada que CARREGA as paradas. No desktop (e em paisagem) ela
+           mede exatamente o palco (inset:0) e nada muda: as paradas ficam
+           onde os data-x/data-y sempre as puseram. No RETRATO ela cresce
+           por svh e sobe com o scroll, para a rota ter para onde correr
+           sem que as cinco paradas se empilhem no mesmo palco. Ver
+           `.journey__layer` no layout.css. -->
+      <div class="journey__layer" data-journey-layer>
       <ol class="journey__list" data-journey-list>
 
         <li class="stop" data-stop="0" data-event="caruaru-fev"
@@ -443,6 +450,7 @@
         </li>
 
       </ol>
+      </div>
 
       <div class="journey__hud" aria-hidden="true">
         <span class="journey__hud-meta">Rota 2027</span>
@@ -1174,6 +1182,18 @@
         Expo Móvel · Feiras corporativas do setor moveleiro
       </p>
       <button class="footer__replay" type="button" data-replay-intro>Rever a introdução</button>
+    </div>
+
+    <!-- Crédito de desenvolvimento. É assinatura de agência, não conteúdo
+         da Expo Móvel: por isso vive fora do bloco de marca e é a última
+         linha do rodapé. Sem script, sem imagem, sem handler — texto puro,
+         então nada aqui entra na coreografia da intro nem na jornada. -->
+    <div class="footer__credit">
+      <p class="footer__credit-line">
+        Desenvolvido por
+        <span class="footer__credit-brand">Unitrix App</span>
+      </p>
+      <p class="footer__credit-cnpj">CNPJ 66.438.449/0001-44</p>
     </div>
   </div>
 </footer>

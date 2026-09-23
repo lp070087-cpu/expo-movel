@@ -565,10 +565,32 @@
   }
   .about__pano figcaption{ text-align:left; }
   .about__pano-place{ max-width:none; }
+  /* Correção: a proporção da caixa tem de ser a do ARQUIVO.
+     ------------------------------------------------------------
+     Com `aspect-ratio:2.8/1` num arquivo 3,763:1 (pavilhao-aereo,
+     1400x372), a janela do `cover` mostrava 2,8/3,763 = 74,4% da
+     largura. Medido (máscara do verde neon): a palavra ocupa
+     x=244..1171, isto é 17,4% a 83,6% da largura. A janela era
+     12,8%..87,2%, então até cabia — mas o `max-height:240px`
+     desfazia o `aspect-ratio` em caixas largas (a 800px de caixa,
+     2,8:1 pede 286px e o teto devolvia 240px = 3,33:1), e aí a
+     janela voltava a 88,5%, cortando o "O" final em 83,6%.
+     Uma conta que depende de um teto condicional é uma conta que
+     vale em algumas larguras e não em outras.
+
+     Agora a caixa É o arquivo: 3,763:1, sem teto. `cover` num
+     casamento exato não recorta — a imagem inteira aparece, nas
+     duas pontas, em qualquer largura. A palavra fica inteira, e a
+     imagem não é distorcida (a proporção é a real).
+
+     O que segue sem solução por CSS: a base das letras já vem
+     truncada DENTRO do arquivo (y=371 de 372). O criativo de
+     origem tem o "OBRIGADO / GOIÁS! / ATÉ 2027!" completo, mas
+     recuperar essa faixa exigiria outro arquivo, e o pedido proíbe
+     editar o original. */
   .about__pano-img img{
     height:auto;
-    aspect-ratio:2.8/1;
-    max-height:240px;
+    aspect-ratio:1400/372;
   }
 }
 
