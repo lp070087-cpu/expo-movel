@@ -378,7 +378,37 @@
 
     /* Reavalia o manifesto quando o layout assenta (fontes, imagens,
        rotação). A tabela de janelas é medida do DOM, então precisa
-       ser refeita quando a altura do palco muda. */
+       ser refeita quando a altura do palco muda.
+
+       E SÓ QUANDO A ALTURA MUDA DE VERDADE — é o que corrige o salto
+       do iOS, e vale a pena explicar por que aqui e não em outro
+       lugar.
+
+       No Safari do iOS a barra de endereço se recolhe/expande durante
+       a rolagem, e cada passo disso dispara `resize`. A sequência é
+       exactamente a que o bug descreve:
+         1. o dedo para; a rolagem para;
+         2. o Safari termina de mover a barra e emite `resize`;
+         3. este handler esperava 200ms e chamava `refazer()`;
+         4. `rebuild()` faz `getBoundingClientRect()` no palco e nas
+            quatro linhas — uma leitura de layout FORÇADA no meio do
+            gesto;
+         5. `poke()` agenda o rAF, que repinta o `clip-path` das
+            linhas;
+         6. o usuário volta a deslizar e a página "salta".
+
+       A checagem `window.innerWidth` abaixo corta isso pela raiz sem
+       tocar em nenhum comportamento de layout: a barra do Safari muda
+       a ALTURA da janela, nunca a largura. Redimensionar de verdade
+       (girar o aparelho, arrastar a janela no desktop) muda a largura
+       e continua refazendo a tabela como antes. Uma roda do mouse no
+       desktop e um `resize` de barra no Android também deixam de
+       disparar trabalho — não há regressão, só menos trabalho inútil.
+
+       A largura é guardada na primeira medição, e não em `boot()`,
+       porque em `boot()` o layout pode ainda não ter assentado. */
+    var larguraVista = window.innerWidth;
+
     function refazer() {
       if (manifesto && manifesto.rebuild) manifesto.rebuild();
       E.ScrollBus.poke();
@@ -389,6 +419,10 @@
     }
     var t = 0;
     window.addEventListener('resize', function () {
+      /* Só largura denuncia uma mudança de layout real. */
+      if (window.innerWidth === larguraVista) return;
+      larguraVista = window.innerWidth;
+
       window.clearTimeout(t);
       t = window.setTimeout(refazer, 200);
     }, { passive: true });

@@ -7,36 +7,26 @@
    SVG cujo stroke-dashoffset é escrito direto no atributo,
    acompanhando exatamente o scroll do usuário.
 
-   DUAS GEOMETRIAS, A MESMA EXPERIÊNCIA
-   ------------------------------------
-   PAISAGEM (desktop, tablet largo, celular deitado)
+   DOIS MODOS, ESCOLHIDOS POR LARGURA
+   ----------------------------------
+   ROTA (a partir de 981px — desktop e tablet largo)
      A caixa da rota é um quadro só do tamanho do palco. As paradas
      ficam onde os `data-x`/`data-y` do HTML as puseram — a tabela de
-     cinco pontos num quadro 16:9, que nunca se cruza.
+     cinco pontos num quadro 16:9, que nunca se cruza. O progresso é
+         p = (rolagem dentro da pista) / (pista - altura do palco)
+     e `paint()` escreve o `stroke-dashoffset`, o HUD e as classes
+     `is-reached`/`is-current`.
 
-   RETRATO (celular em pé)
-     O mesmo quadro esticado para 390x844 dá escala 0,39 em x e 2,01
-     em y, e aí cinco cartões de ~170px de altura se sobrepõem aos
-     pares (medido em gerbench.py: 4 conflitos, o pior 275x138px, e
-     duas caixas fora do palco). Não existe tabela que resolva — é
-     falta de espaço, não de número.
-     Então, SÓ em `@media (max-width:980px) and (orientation:portrait)`,
-     a camada das paradas cresce por `svh` (300svh) e SOBE com o
-     scroll. O palco segue sticky em 100svh, a rota segue desenhada
-     por stroke-dashoffset casado com o progresso, e o `is-reached`
-     segue acendendo cidade, data e CTA um a um — mas cada parada tem
-     ~20svh de faixa só para ela, e a viagem acontece de verdade: a
-     cidade seguinte entra por baixo, em vez de aparecer no mesmo
-     lugar da anterior.
+   LISTA (até 980px — celular, em pé ou deitado)
+     O calendário é uma timeline vertical; o palco, o canvas e o HUD
+     nem existem no fluxo (o layout.css esconde). Aqui o módulo faz
+     UMA coisa: sair do caminho. `disable()` cancela a assinatura do
+     ScrollBus e não sobra nenhuma leitura de layout por evento de
+     rolagem. A revelação das praças, nesse modo, é estática e vem
+     do CSS — todas as cinco já estão visíveis.
 
-   Em ambos os modos o progresso é o MESMO:
-       p = (rolagem dentro da pista) / (pista - altura do palco)
-   Em retrato o deslocamento da camada é 100% desse progresso, então
-   rota e cartões nunca se separam.
-
-   A LISTA ESTÁTICA NÃO ESTÁ AQUI. Ela vive só em
-   `prefers-reduced-motion`, onde é acessibilidade. Por largura de
-   tela ela não é mais usada.
+   O modo é reavaliado no `resize`, então girar o aparelho troca de
+   um para o outro sem deixar resíduo do anterior.
    ============================================================ */
 (function () {
   'use strict';
@@ -54,7 +44,6 @@
   var svg    = $('[data-journey-svg]');
   var path   = $('[data-journey-path]');
   var pathBg = $('[data-journey-path-bg]');
-  var layer  = $('[data-journey-layer]');
   var stops  = $$('.stop', journey);
   var hudIdx = $('[data-journey-index]');
   var hudBar = $('[data-journey-bar]');
@@ -63,43 +52,37 @@
 
   var MOBILE_BP = 980;
 
-  /* Altura da camada em retrato, em svh. PRECISA bater com o
-     `height:300svh` de `@media (max-width:980px) and
-     (orientation:portrait)` no layout.css: é o referencial das
-     coordenadas normalizadas. */
-  var LAYER_SVH = 300;
+  /* Abaixo de 981px o calendário é uma TIMELINE VERTICAL, não a
+     rota animada. Quem decide isso é o CSS (`@media (max-width:980px)`
+     no layout.css); aqui o módulo só precisa saber que, nessa faixa,
+     não há pista nem caminho a desenhar — e que portanto ele NÃO pode
+     assinar o ScrollBus.
 
-  /* As cinco posições em RETRATO, em % da camada (0..100).
-     Passo de 16,5% = 33% da altura da viewport. Assim a parada i
-     fica centrada no palco quando p ≈ 0,05 / 0,28 / 0,515 / 0,748 /
-     0,98 — e a folga entre paradas é de 433px em 430x932 e 264px em
-     320x568, contra cartões de 189px a 150px.
-     O ziguezague 30/70/30/70/50 dá 34px a 21px de folga lateral. */
-  var PT_X = [30, 70, 30, 70, 50];
-  var PT_Y = [20, 36.5, 53, 69.5, 86];
+     Por que isso importa para o bug do iOS: o subscriber chamava
+     `rail.offsetHeight` e `rail.getBoundingClientRect()` a CADA
+     evento de rolagem. Numa timeline vertical, `paint()` não tem o
+     que pintar, mas a leitura de layout acontece do mesmo jeito —
+     e medir o layout no meio da rolagem é a receita conhecida de
+     salto no Safari do iOS. Desligado o modo, o módulo sai do
+     caminho quente por completo: nenhuma leitura, nenhuma escrita.
+
+     A geometria de retrato que existia aqui (camada de `300svh`, uma
+     tabela de posições `PT_X`/`PT_Y` e o `--layer-shift`) foi
+     REMOVIDA junto com o bloco de CSS que a sustentava. Não há mais
+     caminho em que o módulo desenhe a rota no celular, então manter
+     as duas tabelas de coordenadas só criaria a ilusão de que o
+     retrato ainda é atendido por aqui. */
 
   /* ----------------------------------------------------------
      Estado
      ---------------------------------------------------------- */
-  var portrait = false;   /* retrato = camada alta + rota normalizada */
   var canvasH = 0;        /* altura da caixa do SVG em px */
-  var layerH = 0;         /* altura real da camada (= canvasH) */
-  var passo = 0;          /* quanto a camada sobe do início ao fim */
   var progress = 0;       /* último progresso pintado */
-  var layerShift = 0;     /* deslocamento atual da camada, em px */
   var pts = [];           /* pontos em px da CAIXA */
   var fractions = [];
   var totalLen = 0;
   var ready = false;
   var lastIndex = -1;
-
-  /* ----------------------------------------------------------
-     Modo
-     ---------------------------------------------------------- */
-  function ehRetrato() {
-    return window.innerWidth <= MOBILE_BP &&
-           window.innerHeight > window.innerWidth;
-  }
 
   /* ----------------------------------------------------------
      Geometria
@@ -109,22 +92,11 @@
   function pontosViewport() {
     var x = [], y = [], i;
 
-    if (portrait) {
-      for (i = 0; i < stops.length; i++) {
-        x.push(PT_X[i]);
-        /* PT_Y é % da camada (0..100) -> % da viewport, e então o
-           deslocamento da camada, medido pelo MESMO `progress` que
-           move o `--layer-shift`. */
-        y.push(PT_Y[i] / 100 * (layerH / window.innerHeight) * 100
-               - progress * (passo / window.innerHeight) * 100);
-      }
-    } else {
-      for (i = 0; i < stops.length; i++) {
-        var el = stops[i];
-        x.push(parseFloat(el.getAttribute('data-x') || '50'));
-        /* 50% é o centro do palco — a mesma âncora do CSS. */
-        y.push(parseFloat(el.getAttribute('data-y') || '50') - 50);
-      }
+    for (i = 0; i < stops.length; i++) {
+      var el = stops[i];
+      x.push(parseFloat(el.getAttribute('data-x') || '50'));
+      /* 50% é o centro do palco — a mesma âncora do CSS. */
+      y.push(parseFloat(el.getAttribute('data-y') || '50') - 50);
     }
     return { x: x, y: y };
   }
@@ -144,25 +116,17 @@
     return out;
   }
 
-  /* Posição de cada parada, em % do REFERENCIAL DELA.
-     - retrato: % da camada (o CSS posiciona dentro da camada);
-     - paisagem: % do palco (o CSS posiciona dentro do palco). */
+  /* Posição de cada parada, em % do PALCO — o CSS posiciona dentro
+     dele. As coordenadas vêm dos `data-x`/`data-y` do HTML, que são
+     as mesmas no desktop aprovado. */
   function escreverPosicoes() {
     for (var i = 0; i < stops.length; i++) {
-      if (portrait) {
-        /* A camada se move por `transform`; o filho só precisa ficar
-           na posição absoluta dentro dela. */
-        stops[i].style.setProperty('--sx', PT_X[i] + '%');
-        stops[i].style.setProperty('--sy', PT_Y[i] + '%');
-        stops[i].style.setProperty('--ly', '0px');
-      } else {
-        var el = stops[i];
-        stops[i].style.setProperty('--sx',
-          parseFloat(el.getAttribute('data-x') || '50') + '%');
-        stops[i].style.setProperty('--sy',
-          parseFloat(el.getAttribute('data-y') || '50') + '%');
-        stops[i].style.setProperty('--ly', '0px');
-      }
+      var el = stops[i];
+      el.style.setProperty('--sx',
+        parseFloat(el.getAttribute('data-x') || '50') + '%');
+      el.style.setProperty('--sy',
+        parseFloat(el.getAttribute('data-y') || '50') + '%');
+      el.style.setProperty('--ly', '0px');
     }
   }
 
@@ -222,30 +186,22 @@
      Construção
      ---------------------------------------------------------- */
   function build() {
-    portrait = ehRetrato();
-
     /* A caixa do SVG é o referencial de tudo. Medida de uma vez só:
        nenhum getter de layout dentro do laço de pintura. */
     canvasH = svg.getBoundingClientRect().height;
     if (!canvasH || canvasH < 2) {
-      /* Sem layout ainda (ou display:none): o que o CSS promete. */
-      canvasH = portrait
-        ? LAYER_SVH / 100 * window.innerHeight
-        : window.innerHeight;
+      /* Sem layout ainda (ou display:none): o que o CSS promete —
+         o palco é 100svh. */
+      canvasH = window.innerHeight;
     }
-    layerH = canvasH;
-    /* Quanto a camada sobe do início ao fim do progresso. Zero em
-       paisagem (a camada É o palco). É o MESMO número usado pelo
-       `--layer-shift` e pelas coordenadas da rota. */
-    passo = portrait ? Math.max(0, layerH - window.innerHeight) : 0;
 
     /* O viewBox é [0..100] em x e [0..canvasH] em y. Com
        `preserveAspectRatio="none"` isso dá uma transformação
        identidade entre unidades e px: o traço não é escalado de
        forma nenhuma e o `vector-effect:non-scaling-stroke` do CSS
-       continua valendo. Em PAISAGEM o primeiro build (antes de o
-       layout assentar) pode cair no palpite acima; aí o número bate
-       com os 420 do HTML e o viewBox não muda de valor. */
+       continua valendo. O primeiro build, antes de o layout
+       assentar, pode cair no palpite acima; aí o número bate com os
+       420 do HTML e o viewBox não muda de valor. */
     svg.setAttribute('viewBox', '0 0 100 ' + canvasH.toFixed(2));
 
     escreverPosicoes();
@@ -286,14 +242,6 @@
 
     if (!ready) return;
 
-    /* Em retrato a camada sobe junto com o progresso — com o MESMO
-       `passo` que gerou as coordenadas do caminho, então rota e
-       cartões nunca se separam. */
-    if (portrait && layer) {
-      layerShift = -progress * passo;
-      layer.style.setProperty('--layer-shift', layerShift.toFixed(2) + 'px');
-    }
-
     path.style.strokeDashoffset = (totalLen * (1 - progress)).toFixed(2);
 
     if (hudBar) hudBar.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
@@ -327,81 +275,112 @@
      Ciclo de vida
      ---------------------------------------------------------- */
   var unsubscribe = null;
-  var lastPortrait = null;
+  var isMobile = false;
 
-  function ligar() {
-    if (unsubscribe) return;
-    unsubscribe = E.ScrollBus.subscribe(function (_y, _py, _docH, winH) {
-      var railH = rail.offsetHeight;
-      var rect = rail.getBoundingClientRect();
-      var runway = railH - winH;
+  function enable() {
+    if (isMobile) return;
 
-      /* O modo pode ter virado com a rotação do aparelho. */
-      var agora = ehRetrato();
-      if (agora !== lastPortrait) {
-        lastPortrait = agora;
-        portrait = agora;
-        build();
-      }
+    if (!ready) build();
 
-      var p = runway > 0
-        ? clamp(-rect.top / runway, 0, 1)
-        : (rect.top <= winH * 0.5 ? 1 : 0);
+    if (!unsubscribe) {
+      unsubscribe = E.ScrollBus.subscribe(function (_y, _py, _docH, winH) {
+        if (isMobile) return;
 
-      paint(p);
-    });
+        var railH = rail.offsetHeight;
+        var rect = rail.getBoundingClientRect();
+        var runway = railH - winH;
+
+        var p = runway > 0
+          ? clamp(-rect.top / runway, 0, 1)
+          : (rect.top <= winH * 0.5 ? 1 : 0);
+
+        paint(p);
+      });
+    }
   }
 
-  /* Estado estático: só para quem pediu MENOS MOVIMENTO (ou não tem
-     JS dependente de observer). Por largura de tela isto não é mais
-     usado — ver o bloco de orientação no layout.css. */
-  function estatico() {
+  /* Sem rota animada as cinco praças já estão visíveis pela lista
+     estática do CSS — então o módulo apenas sai do caminho: cancela
+     a assinatura e deixa o caminho pintado por inteiro, para o caso
+     de o aparelho ter girado no meio de uma rota já desenhada. */
+  function disable() {
     if (unsubscribe) { unsubscribe(); unsubscribe = null; }
     lastIndex = -1;
-    progress = 1;
 
     if (path) path.style.strokeDashoffset = 0;
     if (hudBar) hudBar.style.transform = 'scaleX(1)';
+
     for (var i = 0; i < stops.length; i++) {
       stops[i].classList.add('is-reached');
       stops[i].classList.remove('is-current');
     }
   }
 
+  function applyMode() {
+    var agoraMobile = window.innerWidth <= MOBILE_BP;
+
+    if (agoraMobile === isMobile) {
+      if (isMobile) disable();
+      else { build(); enable(); }
+      return;
+    }
+
+    /* Mudou de faixa: ou o aparelho girou, ou a janela foi
+       redimensionada. Um dos dois caminhos precisa ser DESFEITO —
+       é isto que impede a rota de ficar desenhada em cima de uma
+       lista vertical, e vice-versa. */
+    isMobile = agoraMobile;
+    if (isMobile) disable();
+    else { build(); enable(); }
+  }
+
   /* ----------------------------------------------------------
      Boot
      ---------------------------------------------------------- */
   function boot() {
-    portrait = ehRetrato();
-    lastPortrait = portrait;
+    isMobile = window.innerWidth <= MOBILE_BP;
 
-    if (reduced) {
-      estatico();
+    if (isMobile) {
+      disable();
     } else {
       build();
-      ligar();
+      enable();
     }
 
     /* A rota depende das fontes carregadas: reconstrói depois */
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(function () {
-        if (!reduced) { build(); E.ScrollBus.poke(); }
+        if (!isMobile) { build(); E.ScrollBus.poke(); }
       }).catch(function () {});
     }
 
     window.addEventListener('load', function () {
-      if (!reduced) { build(); E.ScrollBus.poke(); }
+      if (!isMobile) { build(); E.ScrollBus.poke(); }
     });
+
+    /* Mesma guarda do main.js, e pelo mesmo motivo: no iOS a barra
+       de endereço dispara `resize` durante a rolagem, sem que nada
+       de layout tenha mudado. Aqui o custo de atender esse evento é
+       pior ainda — `applyMode()` chama `build()`, que reescreve o
+       `viewBox` do SVG, o `d` do caminho, o `strokeDasharray` e o
+       `strokeDashoffset`. Ou seja: quatro escritas de geometria num
+       SVG de 360vh, no meio do gesto. Era isso que fazia a página
+       "pular" ao retomar o scroll.
+
+       A barra do Safari muda a ALTURA, nunca a largura; girar o
+       aparelho muda a largura. A guarda separa um do outro sem
+       tocar no que acontece quando o layout muda de verdade. */
+    var larguraVista = window.innerWidth;
 
     var resizeTimer = 0;
     window.addEventListener('resize', function () {
+      if (window.innerWidth === larguraVista) return;
+      larguraVista = window.innerWidth;
+
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(function () {
         if (reduced) return;
-        portrait = ehRetrato();
-        lastPortrait = portrait;
-        build();
-        if (!unsubscribe) ligar();
+        applyMode();
         E.ScrollBus.poke();
       }, 180);
     }, { passive: true });
@@ -417,10 +396,10 @@
   window.EXPO.journey = {
     rebuild: build,
     fractions: function () { return fractions.slice(); },
-    isMobile: function () { return portrait; },
+    isMobile: function () { return isMobile; },
     geometry: function () {
-      return { portrait: portrait, canvasH: canvasH, viewBox: svg.getAttribute('viewBox'),
-               progress: progress, layerShift: layerShift };
+      return { canvasH: canvasH, viewBox: svg.getAttribute('viewBox'),
+               progress: progress };
     }
   };
 })();

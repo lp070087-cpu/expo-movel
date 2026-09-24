@@ -628,6 +628,30 @@ body.has-pointer .spotlight{ opacity:1; }
   text-shadow:0 0 40px rgba(245,224,0,.38);
 }
 
+/* ------------------------------------------------------------
+   "AQUI." NO CELULAR — o glow vira mancha, então sai.
+   ------------------------------------------------------------
+   No desktop aquele `text-shadow:0 0 40px rgba(245,224,0,.38)` lê
+   como luz e está aprovado. No celular NÃO: o título cai para
+   `--t-h1` (fonte grande, poucos caracteres) e o mesmo blur de 40px
+   passa a ter o diâmetro da palavra. O resultado é o que o pedido
+   descreve — um borrão amarelo espalhado atrás de "AQUI.", com cara
+   de neon, em vez de tipografia.
+
+   O que muda é SÓ o raio/alfa do brilho. A palavra continua amarela
+   (`color:var(--gold)` intocado, herdado da regra acima) e a sombra
+   preta do título — que dá a ancoragem contra o hero — fica como
+   está. Reduzido a 10px/.10 o halo deixa de ter corpo: é luz de
+   contorno, não mancha.
+
+   `em` sem largura declarada pertence à `.hero__title`, que também
+   não muda aqui — a regra nova só reescreve o `text-shadow` do
+   destaque, e só abaixo de 760px. Acima disso a cascata do desktop
+   nem chega a ser tocada. */
+@media (max-width:760px){
+  .hero__title em{ text-shadow:0 0 10px rgba(245,224,0,.1); }
+}
+
 .hero__lead{
   margin-top:clamp(1.5rem,3vw,2.2rem);
   max-width:56ch;
@@ -668,6 +692,9 @@ body.has-pointer .spotlight{ opacity:1; }
   color:var(--gold);
 }
 
+/* A altura do hero no celular vem depois da regra base, no
+   breakpoint de 760px — ver `.hero{ min-height:... }` lá. Aqui
+   fica só o indicador de rolagem. */
 .hero__scroll{
   position:absolute;
   right:var(--gutter);
@@ -1154,19 +1181,17 @@ body.has-pointer .spotlight{ opacity:1; }
 }
 
 /* --- paradas --- */
-/* A camada das paradas.
-   No desktop ela é `inset:0` — mede o palco e nada mais — então as paradas
+/* A camada das paradas — só na ROTA (a partir de 981px).
+   Aqui ela é `inset:0`: mede o palco e nada mais, então as paradas
    continuam exatamente onde os `data-x`/`data-y` sempre as puseram, e o
    caminho de 5 paradas num quadro 16:9 nunca se cruza (provado em
    `gerbench.py`, seção 4).
-   Isso deixa de valer no RETRATO: 1000x420 empurrados para 390x844 dão
-   escala 0,39 em x e 2,01 em y, e aí os cinco cartões — que têm ~170px de
-   altura de verdade — se sobrepõem aos pares. Medido: 4 pares em conflito,
-   o pior 275x138px. Não é ajuste de número: é falta de espaço.
-   Por isso, SÓ em `(max-width:980px) and (orientation:portrait)`, a camada
-   cresce por `svh` e sobe com o scroll (via `--layer-shift`, escrito pelo
-   journey.js). Aí cada parada tem a sua faixa, a rota corre de verdade e o
-   palco continua mostrando uma cena por vez — que é como o desktop se lê. */
+   Este wrapper existe porque houve, entre duas rodadas, uma geometria de
+   retrato em que a camada crescia por `svh` e subia com o scroll. Essa
+   geometria foi REMOVIDA: abaixo de 981px o calendário voltou a ser a
+   timeline vertical do ramo de `(max-width:980px)`, onde canvas e HUD
+   nem existem e a lista volta ao fluxo. O wrapper ficou porque a lista
+   é filha dele no HTML — o ramo de baixo devolve `position:static`. */
 .journey__layer{ position:absolute; inset:0; }
 
 .journey__list{ position:absolute; inset:0; }
@@ -2192,6 +2217,26 @@ body.has-pointer .spotlight{ opacity:1; }
 }
 
 @media (max-width:980px){
+  /* ------------------------------------------------------------
+     RITMO ENTRE SEÇÕES no celular.
+     ------------------------------------------------------------
+     `--section-y` é `clamp(5.5rem, 12.5vh, 11rem)` e `.section`
+     aplica em `padding-block` — ou seja, é ELE o espaço que aparece
+     entre o fim de uma seção e o começo da seguinte, somado dos dois
+     lados. No desktop isso dá 176px a 352px de faixa, e ali é
+     composição aprovada. No celular a mesma conta dá 176px a 232px
+     para uma tela de 568px a 844px de altura — até 31% da tela de
+     respiro entre duas seções.
+
+     É essa a origem do "grande tela vazia" do pedido: não é margem
+     perdida, é o token de ritmo calibrado para uma tela larga. O
+     valor novo é o mesmo conceito um degrau abaixo, e continua sendo
+     clamp(): 51px no aparelho mais baixo, 75px no mais alto, dos
+     DOIS lados. Segue havendo respiro, e ele ainda respira mais em
+     telas maiores — que é o que faz um ritmo parecer editorial em
+     vez de apertado. */
+  :root{ --section-y:clamp(3.2rem,8vh,5rem); }
+
   /* Mosaico vira duas colunas com alturas proporcionais */
   .gallery__board{
     grid-template-columns:repeat(2,1fr);
@@ -2209,20 +2254,105 @@ body.has-pointer .spotlight{ opacity:1; }
   .hero__strip-place{ max-width:none; }
 
   /* ------------------------------------------------------------
-     CALENDÁRIO — aqui NÃO se toca mais no palco.
+     CALENDÁRIO — abaixo de 981px volta a ser TIMELINE VERTICAL.
      ------------------------------------------------------------
-     Antes este ramo trocava a pista sticky por uma timeline
-     vertical com `.journey__stage{position:static}` e
-     `.stop{position:relative; width:100%}` — o que apagava, por
-     LARGURA de tela, a rota animada, o HUD e o avanço por rolagem.
-     Aquele tratamento continua existindo, mas só para quem pede
-     MENOS MOVIMENTO (`prefers-reduced-motion`), onde ele é
-     acessibilidade e não escolha de layout.
-     Tamanho de tela sozinho não remove mais a experiência. O
-     calendário continua aqui com pista, palco sticky, canvas e HUD;
-     o que o retrato muda é a GEOMETRIA (`.journey__layer` acima e o
-     bloco de orientação no fim deste arquivo), não a existência da
-     experiência. */
+     Esta é a decisão de PRODUTO, tomada depois de ver as duas
+     versões no aparelho: no celular o formato anterior (lista
+     vertical, sem palco sticky, sem rota desenhada) foi o
+     escolhido. O que ficou valendo nesta rodada é o comportamento
+     que o projeto já tinha antes de a experiência cinematográfica
+     ser estendida para o retrato — restaurado aqui a partir do
+     histórico (c290213), não reinventado.
+
+     Continua sendo uma troca de APRESENTAÇÃO, não de conteúdo: as
+     cinco praças, as datas, os endereços e o CTA de credenciamento
+     de cada evento seguem todos na tela. O que sai é o palco de
+     360vh com a rota animada; o que entra é a mesma lista com fio
+     condutor à esquerda.
+
+     O caminho do desktop NÃO passa por aqui: esta regra vive
+     inteira dentro de `(max-width:980px)`, então a partir de 981px
+     a pista sticky, o canvas, o HUD e o `is-reached` por scroll
+     continuam exactamente como estavam.
+
+     O ramo de `prefers-reduced-motion` no fim do arquivo continua
+     fazendo o mesmo, pelo mesmo motivo de sempre (acessibilidade).
+     Lá o estado estático também é o certo, e nada muda. */
+  .journey__rail{ height:auto; }
+  .journey__stage{
+    position:static;
+    height:auto;
+    padding-block:0;
+    display:block;
+  }
+  .journey__canvas,
+  .journey__hud{ display:none; }
+
+  /* O wrapper que existe por causa do retrato (`position:absolute;
+     inset:0`) precisa voltar ao fluxo junto com a lista. Sem esta
+     linha ele continua fora do fluxo e a cadeia `.stage > .layer >
+     .list` não teria altura nenhuma para empurrar — o palco colapsa
+     e a timeline some. O `transform:none` é a outra metade: em
+     modo estático não há camada a deslocar. */
+  .journey__layer{
+    position:static;
+    inset:auto;
+    transform:none;
+  }
+
+  .journey__list{
+    position:static;
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    padding-left:clamp(1.2rem,4vw,2rem);
+    border-left:1px solid var(--line-strong);
+  }
+  .stop{
+    position:relative;
+    left:auto; top:auto;
+    transform:none;
+    width:100%;
+    align-items:flex-start;
+    text-align:left;
+    opacity:1;
+    filter:none;
+    padding-block:clamp(1.5rem,4.5vw,2.4rem);
+    padding-left:clamp(1.1rem,3.5vw,1.8rem);
+    border-bottom:1px solid var(--line);
+  }
+  .stop:last-child{ border-bottom:0; }
+  .stop__node{ position:absolute; left:calc(-1 * clamp(1.2rem,4vw,2rem) - 5px); top:clamp(1.9rem,5vw,2.9rem); }
+  .stop__meta,.stop__event{ color:var(--text-soft); }
+  .stop__event{ color:var(--gold); }
+
+  /* ------------------------------------------------------------
+     O CTA que não existia no celular — a correção que já estava
+     aqui e continua valendo.
+     ------------------------------------------------------------
+     O `journey.js` escreve `is-reached`/`is-current` SÓ no caminho
+     de desktop. Abaixo de 980px ele entra em modo estático e nunca
+     marca classe nenhuma. Só que a cor legível das paradas e a
+     revelação do CTA por evento estavam penduradas em
+     `.stop.is-reached`:
+        `.stop__city` → var(--text-dim) até a parada ser alcançada
+        `.stop__cta`  → `opacity:0` + `pointer-events:none`
+     Resultado: na timeline vertical a cidade ficava em cinza
+     apagado (--text-dim #6E7484 sobre --ink #06070A = 4,31:1,
+     abaixo de 4,5:1) e o botão "Credenciar-se" NÃO EXISTIA em
+     nenhuma das cinco praças — os CTAs de credenciamento por evento
+     sumiam justamente no aparelho onde o visitante mais navega.
+     Era regra de estado faltando no ramo mobile, não intenção de
+     design.
+     Aqui o estado é fixado no que ele significa quando não há
+     rolagem animada: numa lista estática TODAS as paradas estão
+     visivelmente presentes. O `is-reached` do desktop fica intacto.
+     (O bloco de prefers-reduced-motion já fazia exactamente isto,
+     pelo mesmo motivo.) */
+  .stop__when{ order:0; color:var(--text-soft); }
+  .stop__when b{ color:var(--gold-soft); }
+  .stop__city{ font-size:clamp(1.9rem,7.5vw,3rem); color:var(--white); }
+  .stop__cta{ opacity:1; transform:none; pointer-events:auto; }
 }
 
 @media (max-width:760px){
@@ -2231,6 +2361,11 @@ body.has-pointer .spotlight{ opacity:1; }
     --nav-h:60px;
   }
 
+  /* `.hero` continua com `min-height:100svh` — ele é o hero, tem de
+     preencher a primeira tela. E o valor é INERTE na prática: o
+     conteúdo (título + lead + botões + fatos + faixa OBRIGADO) já
+     passa de uma tela em qualquer celular da lista, então o hero
+     mede o conteúdo, não a viewport. Não era ele o vazio. */
   .hero{ padding-bottom:1.2rem; justify-content:flex-end; }
 
   /* Os textos finais (digitado + fantasma) em 320px.
@@ -2310,7 +2445,36 @@ body.has-pointer .spotlight{ opacity:1; }
     aspect-ratio:1226/248;
   }
 
-  .manifesto__rail{ height:280vh; }
+  /* ------------------------------------------------------------
+     MANIFESTO no celular — a pista e o corte de cima.
+     ------------------------------------------------------------
+     Duas coisas produziam o vazio entre "OBRIGADO" e
+     "01 MANIFESTO", e nenhuma delas era o hero:
+
+       1. A PISTA. `280vh` aqui (base: `400vh`) para uma animação de
+          QUATRO linhas. O palco é `sticky` em 100svh e, desde a
+          correção da fonte por altura, o conteúdo CABE nele — então
+          tudo acima de 200vh é rolagem em que o palco já está parado
+          e nada novo acontece. Baixar para 200vh devolve 100svh de
+          curso útil: o mesmo das quatro janelas de `0,86/4` que o
+          main.js calcula (`0` a `0,86` da pista, com os 14% finais
+          de respiro). Parar no meio e voltar continua funcionando
+          igual — o scrub é função pura de `p`, não de tempo.
+       2. O CORTE DE CIMA DO PALCO. O palco é
+          `justify-content:center` com `overflow:hidden` e
+          `padding-top:calc(var(--nav-h) + 2.5svh)`. Se o conteúdo
+          for mais alto que o palco, ele transborda IGUALMENTE para
+          cima e para baixo — e o topo é onde mora o rótulo
+          "01 Manifesto". Duas linhas de `.manifesto__line` cabem
+          com folga, uma de `.manifesto__line--wide` (a frase de
+          quatro palavras) pede atenção, e as cinco cápsulas de
+          papéis quebram em duas fileiras de 5 itens em 320px.
+          Em vez de encolher a fonte de novo — ela já foi calibrada
+          e está aprovada — o palco passa a poder crescer, com
+          `min-height:100svh` virando piso e não teto. Assim o
+          rótulo nunca é comido e não sobra faixa morta. */
+  .manifesto__rail{ height:200vh; }
+  .manifesto__stage{ min-height:100svh; height:auto; }
   .manifesto__roles li{ font-size:.72rem; padding:.55rem .85rem .55rem .7rem; }
 
   .stats{ grid-template-columns:1fr; }
@@ -2378,142 +2542,6 @@ body.has-pointer .spotlight{ opacity:1; }
 }
 
 /* ============================================================
-   CALENDÁRIO EM RETRATO — a MESMA experiência, outra geometria
-   ============================================================
-   Por que a rota do desktop não pode simplesmente ser esticada:
-
-   O quadro da rota é `viewBox="0 0 1000 420"` com
-   `preserveAspectRatio="none"`. No desktop ele é esticado para
-   ~1410x800 — escala 1,41 em x e 1,90 em y, praticamente a mesma
-   proporção do desenho. No celular o MESMO quadro vai para
-   390x844: escala 0,39 em x e 2,01 em y. As posições relativas
-   até sobrevivem (os cinco pontos viram um S vertical), mas os
-   cartões são móveis de tamanho fixo, e não adianta encolhê-los —
-   a 320px de largura ainda são ~150px de largura por ~170px de
-   altura cada um.
-
-   Medido (gerbench.py): nas cinco praças, empilhadas dentro de um
-   palco de 100svh, sobram 429px a 756px de faixa livre para 885px
-   de cartão, com 21 a 34px de folga horizontal. A 1000x420 esticado
-   para retrato, as paradas se sobrepõem aos pares — 4 conflitos,
-   o pior 275x138px em 390x844, e duas caixas saem do palco.
-   Isso não é um número a ajustar: é falta de espaço. Não existe
-   tabela de posições que resolva.
-
-   A saída é a mesma que o desktop já usa para o manifesto, e não
-   muda nem o processo nem a técnica: em vez de 5 paradas dentro de
-   UM quadro, uma CAMADA mais alta que o palco, que sobe conforme
-   a rolagem. O palco continua sticky em 100svh, a rota continua
-   desenhada por stroke-dashoffset casado com o progresso, o
-   `is-reached`/`is-current` continua acendendo cidade, data e CTA
-   um a um — mas cada parada tem 20svh de faixa só para ela
-   (300svh / 5 escalonado por 16,5%), e a "viagem" acontece de
-   verdade: a cidade seguinte vem de baixo, não aparece no mesmo
-   lugar da anterior.
-
-   Números do retrato (300svh de camada, passo de 16,5%):
-     palco   430x932 ... 320x568
-     passo   433px ..... 264px
-     cartão  189px ..... 150px   -> sobra 256px a 87px entre paradas
-     x       30% / 70% / 30% / 70% / 50% (ziguezague)
-     folga lateral: 34px a 21px
-   Todas as folgas positivas nos seis aparelhos do pedido.
-
-   A ROTA continua um <path> com os MESMOS 5 pontos, só que as
-   coordenadas passam a ser normalizadas por viewport e o viewBox
-   ganha a altura da camada (viewBox recebe valores unitários
-   independentes em x e y com preserveAspectRatio="none", então a
-   distorção de traço já existe hoje e é a mesma). Quem decide qual
-   geometria usar é o journey.js, por `innerWidth <= 980 &&
-   innerHeight > innerWidth` — o MESMO critério desta media query.
-   Os `data-x`/`data-y` do HTML seguem sendo a tabela do desktop e
-   não foram tocados.
-
-   Só para retrato: em paisagem de celular o palco é largo e curto,
-   a geometria do desktop serve, e não há motivo para trocar. */
-
-@media (max-width:980px) and (orientation:portrait){
-  /* Pista suficiente para a viagem: o deslocamento máximo é
-     300svh - 100svh = 200svh; 340svh deixa 140svh (41%) para o
-     final da rota depois da última parada — a rota não pode
-     terminar junto com a seção. */
-  .journey__rail{ height:340svh; }
-
-  /* Canvas e camada cobrem a MESMA área e sobem juntos, para o
-     desenho e os cartões nunca se separarem. O SVG tem
-     `width:100%;height:100%` e `preserveAspectRatio="none"`, então
-     um viewBox de altura 300 unidades aqui dá exatamente 1:1 com
-     os 300svh da camada. */
-  .journey__canvas,
-  .journey__layer{
-    inset:auto 0 auto 0;
-    top:0;
-    height:300svh;
-    transform:translate3d(0,var(--layer-shift,0px),0);
-    will-change:transform;
-  }
-
-  /* A malha de coordenadas foi calibrada para um quadro de 100vh.
-     Esticada por 300svh ela vira três células gigantes, e a máscara
-     radial (centrada em 50% de 300svh) apagaria justamente o topo
-     da janela visível. Recalibrada, não removida. */
-  .journey__coords{
-    background-size:20% 6.25%;
-    mask-image:linear-gradient(180deg,transparent 0,#000 8%,#000 92%,transparent 100%);
-    -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 8%,#000 92%,transparent 100%);
-  }
-
-  /* Cartão mais estreito que o do desktop não é para caber: é para
-     a parada ter faixa horizontal livre e o ziguezague poder ser
-     30%/70% sem encostar na borda. Ver a folga de 21px a 34px. */
-  .stop{
-    width:clamp(150px,44vw,200px);
-    gap:.4rem;
-  }
-  /* Escala interna do cartão: um degrau abaixo do desktop, na mesma
-     proporção entre as partes (a cidade continua sendo o maior
-     elemento e o evento o menor). */
-  .stop__when{ font-size:.6rem; letter-spacing:.1em; }
-  .stop__when b{ font-size:.76rem; }
-  .stop__city{ font-size:clamp(1.35rem,5.6vw,1.85rem); }
-  .stop__meta{ font-size:.68rem; }
-  .stop__event{ font-size:.54rem; letter-spacing:.1em; }
-  .stop__cta{
-    margin-top:.5rem;
-    padding:.46rem .8rem;
-    font-size:.54rem;
-    letter-spacing:.12em;
-  }
-  .journey__hud{
-    font-size:.6rem;
-    letter-spacing:.13em;
-    gap:.7rem;
-  }
-}
-
-/* Celular deitado: o palco é largo e curto, como no desktop. A
-   geometria de paisagem já serve — só o cartão pede um corte, para
-   dois deles não se cruzarem num quadro de 420px de altura. */
-@media (max-width:980px) and (orientation:landscape){
-  .journey__rail{ height:340svh; }
-  .stop{
-    width:clamp(132px,20vw,190px);
-    gap:.35rem;
-  }
-  .stop__city{ font-size:clamp(1.05rem,2.6vw,1.5rem); }
-  .stop__when{ font-size:.58rem; }
-  .stop__when b{ font-size:.72rem; }
-  .stop__meta{ font-size:.64rem; }
-  .stop__event{ font-size:.52rem; letter-spacing:.1em; }
-  .stop__cta{
-    margin-top:.4rem;
-    padding:.4rem .7rem;
-    font-size:.52rem;
-    letter-spacing:.1em;
-  }
-}
-
-/* ============================================================
    REDUÇÃO DE MOVIMENTO — calendário 2027
    Sem animação não faz sentido arrastar o visitante por 360vh
    de rolagem só para ver uma rota parada. A pista volta ao
@@ -2531,6 +2559,18 @@ body.has-pointer .spotlight{ opacity:1; }
   }
   .journey__canvas,
   .journey__hud{ display:none; }
+
+  /* O wrapper que existe por causa do retrato (`position:absolute;
+     inset:0`) precisa voltar ao fluxo junto com a lista. Sem esta
+     linha ele continua fora do fluxo e a cadeia `.stage > .layer >
+     .list` não teria altura nenhuma para empurrar — o palco colapsa
+     e a timeline some. O `transform:none` é a outra metade: em
+     modo estático não há camada a deslocar. */
+  .journey__layer{
+    position:static;
+    inset:auto;
+    transform:none;
+  }
 
   .journey__list{
     position:static;
